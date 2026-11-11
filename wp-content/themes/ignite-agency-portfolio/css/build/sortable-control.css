@@ -1,0 +1,28 @@
+/*Sortable CSS*/
+
+.customize-control-ignite-agency-portfolio-sortable .sortable {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.customize-control-ignite-agency-portfolio-sortable .sortable li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  background: #fff;
+  text-transform: capitalize;
+}
+.customize-control-ignite-agency-portfolio-sortable .sortable li .visibility {
+  margin-left: auto;
+  color: #333;
+}
+.customize-control-ignite-agency-portfolio-sortable .customize-control-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.customize-control-ignite-agency-portfolio-sortable .customize-control-description {
+  color: #666;
+  margin-bottom: 10px;
+}

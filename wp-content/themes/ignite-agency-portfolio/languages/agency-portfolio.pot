@@ -1,0 +1,947 @@
+# Copyright (C) 2026 themeignite
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ignite Agency Portfolio 1.0\n"
+"Report-Msgid-Bugs-To: https://WordPress.org/support/theme/ignite-agency-portfolio\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-25T16:35:18+05:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: ignite-agency-portfolio\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "Ignite Agency Portfolio"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://www.themeignite.com/products/ignite-agency-portfolio"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "The Ignite Agency Portfolio theme is designed with a structured layout for presenting projects, visual content, team information, services, and business details in a clear and organized manner. It includes responsive page layouts, customizable homepage sections, portfolio galleries, banner areas, and flexible content blocks that help manage information efficiently. The responsive design ensures content adapts to desktops, tablets, and mobile devices while maintaining consistency across screen sizes. The theme offers customization options for colors, typography, headers, menus, backgrounds, and page layouts through an intuitive settings interface. Additional features include blog integration, testimonial sections, social media connectivity, widget-ready areas, and contact form compatibility. Built with a clean code structure, the theme supports compatibility with commonly used plugins and follows modern development standards. Portfolio showcase sections allow projects and visual content to be organized effectively, while flexible templates support different content arrangements. Navigation elements are structured to improve accessibility and content discovery. The theme provides practical customization tools for managing visual presentation and content organization while maintaining responsive performance and usability across multiple devices and viewing environments."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "themeignite"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://www.themeignite.com/"
+msgstr ""
+
+#: 404.php:18
+msgid "404 Image"
+msgstr ""
+
+#: 404.php:20
+#: inc/customizer.php:1279
+msgid "404"
+msgstr ""
+
+#: 404.php:21
+#: inc/customizer.php:1292
+msgid "Sorry, that page can't be found!"
+msgstr ""
+
+#: 404.php:24
+msgid "Homepage"
+msgstr ""
+
+#: comments.php:29
+msgid "Comments"
+msgstr ""
+
+#: comments.php:44
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:46
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:47
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:59
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:72
+#: sidebar.php:31
+msgid "secondsidebar"
+msgstr ""
+
+#: footer.php:73
+#: sidebar.php:32
+msgid "Archive List"
+msgstr ""
+
+#: footer.php:79
+#: sidebar.php:38
+msgid "thirdsidebar"
+msgstr ""
+
+#: footer.php:80
+#: sidebar.php:39
+msgid "Recent Posts"
+msgstr ""
+
+#: footer.php:97
+#: sidebar.php:56
+msgid "fourthsidebar"
+msgstr ""
+
+#: footer.php:98
+#: sidebar.php:57
+msgid "Categories"
+msgstr ""
+
+#: footer.php:109
+msgid "fifthsidebar"
+msgstr ""
+
+#: footer.php:110
+msgid "Tags"
+msgstr ""
+
+#: functions.php:48
+msgid "Primary"
+msgstr ""
+
+#: functions.php:151
+msgid "Sidebar Option"
+msgstr ""
+
+#: functions.php:160
+msgid "Sidebar Two"
+msgstr ""
+
+#: functions.php:169
+msgid "Sidebar Three"
+msgstr ""
+
+#: functions.php:178
+msgid "Footer One"
+msgstr ""
+
+#: functions.php:188
+msgid "Footer Two"
+msgstr ""
+
+#: functions.php:198
+msgid "Footer Three"
+msgstr ""
+
+#: functions.php:208
+msgid "Footer Four"
+msgstr ""
+
+#: functions.php:218
+msgid "Shop Sidebar"
+msgstr ""
+
+#: functions.php:228
+msgid "Single Product Sidebar"
+msgstr ""
+
+#: functions.php:329
+msgid "Oops! That page can’t be found."
+msgstr ""
+
+#: functions.php:331
+msgid "Search Result For."
+msgstr ""
+
+#: functions.php:333
+msgid "Blogs"
+msgstr ""
+
+#: functions.php:335
+msgid "Shop"
+msgstr ""
+
+#: header.php:57
+msgid "Skip to content (Press Enter)"
+msgstr ""
+
+#: header.php:68
+msgid "Mobile"
+msgstr ""
+
+#: inc/controls/changeable-icon.php:23
+msgctxt "placeholder"
+msgid "Search Icon"
+msgstr ""
+
+#: inc/custom-header.php:34
+msgctxt "header image description"
+msgid "Default Banner"
+msgstr ""
+
+#: inc/customizer.php:26
+msgid "Static Front Page"
+msgstr ""
+
+#: inc/customizer.php:32
+msgid "Choose Post"
+msgstr ""
+
+#: inc/customizer.php:48
+msgid "Choose Category"
+msgstr ""
+
+#: inc/customizer.php:60
+msgid "Default Settings"
+msgstr ""
+
+#: inc/customizer.php:61
+msgid "Default section provided by WordPress customizer."
+msgstr ""
+
+#: inc/customizer.php:89
+msgid "Show / Hide Site Title"
+msgstr ""
+
+#: inc/customizer.php:107
+msgid "Show / Hide Tagline"
+msgstr ""
+
+#: inc/customizer.php:119
+msgid "Logo Width"
+msgstr ""
+
+#: inc/customizer.php:139
+msgid "Site Title Font Size"
+msgstr ""
+
+#: inc/customizer.php:153
+msgid "Post & Pages Settings"
+msgstr ""
+
+#: inc/customizer.php:154
+msgid "Customize Post & Pages Settings"
+msgstr ""
+
+#: inc/customizer.php:163
+msgid "Post Layout Settings"
+msgstr ""
+
+#: inc/customizer.php:176
+msgid "Post Column Settings"
+msgstr ""
+
+#: inc/customizer.php:181
+msgid "One Column"
+msgstr ""
+
+#: inc/customizer.php:182
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/customizer.php:183
+msgid "Left Sidebar"
+msgstr ""
+
+#: inc/customizer.php:184
+msgid "Three Columns"
+msgstr ""
+
+#: inc/customizer.php:185
+msgid "Four Columns"
+msgstr ""
+
+#: inc/customizer.php:195
+msgid "Post Settings"
+msgstr ""
+
+#: inc/customizer.php:214
+msgid "Show / Hide Post Heading"
+msgstr ""
+
+#: inc/customizer.php:232
+msgid "Show / Hide Post Meta"
+msgstr ""
+
+#: inc/customizer.php:250
+msgid "Show / Hide Post Image"
+msgstr ""
+
+#: inc/customizer.php:268
+msgid "Show / Hide Post Content"
+msgstr ""
+
+#: inc/customizer.php:282
+msgid "Display Read More Button"
+msgstr ""
+
+#: inc/customizer.php:290
+msgid "Post Meta Ordering"
+msgstr ""
+
+#: inc/customizer.php:291
+msgid "Drag & drop post items to rearrange the ordering ( this control will not function by post format )"
+msgstr ""
+
+#: inc/customizer.php:294
+msgid "heading"
+msgstr ""
+
+#: inc/customizer.php:295
+msgid "author"
+msgstr ""
+
+#: inc/customizer.php:296
+msgid "featured-image"
+msgstr ""
+
+#: inc/customizer.php:297
+msgid "content"
+msgstr ""
+
+#: inc/customizer.php:298
+msgid "button"
+msgstr ""
+
+#: inc/customizer.php:308
+msgid "Single Post Settings"
+msgstr ""
+
+#: inc/customizer.php:327
+msgid "Show / Hide Single Post Meta"
+msgstr ""
+
+#: inc/customizer.php:345
+msgid "Show / Hide Single Post Content"
+msgstr ""
+
+#: inc/customizer.php:355
+msgid "Global Color Settings"
+msgstr ""
+
+#: inc/customizer.php:367
+msgid "Theme Primary Color"
+msgstr ""
+
+#: inc/customizer.php:377
+msgid "Theme Secondary Color"
+msgstr ""
+
+#: inc/customizer.php:387
+msgid "Theme Tertiary Color"
+msgstr ""
+
+#: inc/customizer.php:396
+msgid "Typography Settings"
+msgstr ""
+
+#: inc/customizer.php:404
+msgid "Select"
+msgstr ""
+
+#: inc/customizer.php:437
+msgid "Select Font for Heading"
+msgstr ""
+
+#: inc/customizer.php:449
+msgid "Select Font for Body"
+msgstr ""
+
+#: inc/customizer.php:461
+msgid "General Settings"
+msgstr ""
+
+#: inc/customizer.php:462
+msgid "Customize General Settings"
+msgstr ""
+
+#: inc/customizer.php:470
+msgid "Loader Settings"
+msgstr ""
+
+#: inc/customizer.php:489
+msgid "Show Preloader"
+msgstr ""
+
+#: inc/customizer.php:502
+msgid "Preloader Layout"
+msgstr ""
+
+#: inc/customizer.php:507
+msgid "Preloader 1"
+msgstr ""
+
+#: inc/customizer.php:508
+msgid "Preloader 2"
+msgstr ""
+
+#: inc/customizer.php:509
+msgid "Preloader 3"
+msgstr ""
+
+#: inc/customizer.php:517
+msgid "Header Section Settings"
+msgstr ""
+
+#: inc/customizer.php:536
+msgid "Show Sticky Header"
+msgstr ""
+
+#: inc/customizer.php:554
+#: inc/customizer.php:1073
+msgid "Button Text"
+msgstr ""
+
+#: inc/customizer.php:573
+#: inc/customizer.php:1092
+msgid "Button URL"
+msgstr ""
+
+#: inc/customizer.php:588
+msgid "Menu Font Weight"
+msgstr ""
+
+#: inc/customizer.php:592
+msgid "100 - Thin"
+msgstr ""
+
+#: inc/customizer.php:593
+msgid "200 - Extra Light"
+msgstr ""
+
+#: inc/customizer.php:594
+msgid "300 - Light"
+msgstr ""
+
+#: inc/customizer.php:595
+msgid "400 - Normal"
+msgstr ""
+
+#: inc/customizer.php:596
+msgid "500 - Medium"
+msgstr ""
+
+#: inc/customizer.php:597
+msgid "600 - Semi Bold"
+msgstr ""
+
+#: inc/customizer.php:598
+msgid "700 - Bold"
+msgstr ""
+
+#: inc/customizer.php:599
+msgid "800 - Extra Bold"
+msgstr ""
+
+#: inc/customizer.php:600
+msgid "900 - Black"
+msgstr ""
+
+#: inc/customizer.php:612
+msgid "Menu Text Transform"
+msgstr ""
+
+#: inc/customizer.php:616
+#: inc/customizer.php:633
+msgid "None"
+msgstr ""
+
+#: inc/customizer.php:617
+msgid "Capitalize"
+msgstr ""
+
+#: inc/customizer.php:618
+msgid "Uppercase"
+msgstr ""
+
+#: inc/customizer.php:619
+msgid "Lowercase"
+msgstr ""
+
+#: inc/customizer.php:630
+msgid "Menu Hover Style"
+msgstr ""
+
+#: inc/customizer.php:634
+msgid "Zoom In"
+msgstr ""
+
+#: inc/customizer.php:644
+msgid "Home Page Settings"
+msgstr ""
+
+#: inc/customizer.php:645
+msgid "Customize Home Page Settings"
+msgstr ""
+
+#: inc/customizer.php:652
+msgid "Banner Settings"
+msgstr ""
+
+#: inc/customizer.php:662
+msgid "Banner Section Settings"
+msgstr ""
+
+#: inc/customizer.php:681
+msgid "Show Banner"
+msgstr ""
+
+#: inc/customizer.php:694
+msgid "Let's Talk Image"
+msgstr ""
+
+#: inc/customizer.php:711
+msgid "Let's Talk Title"
+msgstr ""
+
+#: inc/customizer.php:729
+msgid "Let's Talk Heading"
+msgstr ""
+
+#: inc/customizer.php:748
+msgid "Let's Talk Button Text"
+msgstr ""
+
+#: inc/customizer.php:767
+msgid "Let's Talk Button URL"
+msgstr ""
+
+#: inc/customizer.php:786
+msgid "Idea Title"
+msgstr ""
+
+#: inc/customizer.php:804
+msgid "Idea Content"
+msgstr ""
+
+#: inc/customizer.php:816
+msgid "Banner First Title ( 1 word only )"
+msgstr ""
+
+#: inc/customizer.php:826
+msgid "Review Count"
+msgstr ""
+
+#: inc/customizer.php:830
+msgid "4.8k Plus"
+msgstr ""
+
+#: inc/customizer.php:839
+msgid "Review Text ( 2 words only )"
+msgstr ""
+
+#: inc/customizer.php:852
+msgid "Review Image 1"
+msgstr ""
+
+#: inc/customizer.php:867
+msgid "Review Image 2"
+msgstr ""
+
+#: inc/customizer.php:882
+msgid "Review Image 3"
+msgstr ""
+
+#: inc/customizer.php:897
+msgid "Review Image 4"
+msgstr ""
+
+#: inc/customizer.php:909
+msgid "Banner Second Title"
+msgstr ""
+
+#: inc/customizer.php:925
+msgid "Banner Content"
+msgstr ""
+
+#: inc/customizer.php:939
+msgid "Banner Background Image"
+msgstr ""
+
+#: inc/customizer.php:949
+msgid "About Section Settings"
+msgstr ""
+
+#: inc/customizer.php:967
+msgid "Show About Section"
+msgstr ""
+
+#: inc/customizer.php:985
+msgid "Section Sub Title"
+msgstr ""
+
+#: inc/customizer.php:1004
+msgid "Section Title"
+msgstr ""
+
+#: inc/customizer.php:1022
+msgid "Section Content"
+msgstr ""
+
+#: inc/customizer.php:1038
+msgid "Icon"
+msgstr ""
+
+#. translators: %d: Icon number.
+#: inc/customizer.php:1055
+msgid "Icon Text %d"
+msgstr ""
+
+#: inc/customizer.php:1104
+msgid "Years Of Experience Count"
+msgstr ""
+
+#: inc/customizer.php:1108
+msgid "15+"
+msgstr ""
+
+#: inc/customizer.php:1117
+msgid "Experience Text ( 3 words only )"
+msgstr ""
+
+#: inc/customizer.php:1129
+msgid "Add Image"
+msgstr ""
+
+#: inc/customizer.php:1142
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/customizer.php:1160
+msgid "Copyright Info"
+msgstr ""
+
+#: inc/customizer.php:1177
+msgid "Footer Background Image"
+msgstr ""
+
+#. translators: 1: image width in pixels, 2: image height in pixels
+#: inc/customizer.php:1179
+msgid "Recommended Size %1$s px X %2$s px"
+msgstr ""
+
+#: inc/customizer.php:1196
+msgid "Footer Background Attachment"
+msgstr ""
+
+#: inc/customizer.php:1201
+msgid "fixed"
+msgstr ""
+
+#: inc/customizer.php:1202
+msgid "scroll"
+msgstr ""
+
+#: inc/customizer.php:1219
+msgid "Footer Widget Area Background Color"
+msgstr ""
+
+#: inc/customizer.php:1232
+msgid "Scroll Top Icon"
+msgstr ""
+
+#: inc/customizer.php:1245
+msgid "Scroll Top Button Shape"
+msgstr ""
+
+#: inc/customizer.php:1250
+msgid "Box"
+msgstr ""
+
+#: inc/customizer.php:1251
+msgid "Curved Box"
+msgstr ""
+
+#: inc/customizer.php:1252
+msgid "Circle"
+msgstr ""
+
+#: inc/customizer.php:1260
+msgid "404 Page Settings"
+msgstr ""
+
+#: inc/customizer.php:1273
+msgid "404 Page Image"
+msgstr ""
+
+#: inc/customizer.php:1286
+#: inc/customizer.php:1299
+msgid "Heading"
+msgstr ""
+
+#: inc/extra.php:92
+msgid "&copy; "
+msgstr ""
+
+#: inc/extra.php:92
+msgid "Y"
+msgstr ""
+
+#: inc/extra.php:93
+msgid ". All Rights Reserved."
+msgstr ""
+
+#: inc/extra.php:96
+msgid "By "
+msgstr ""
+
+#: inc/extra.php:96
+msgid "Themeignite"
+msgstr ""
+
+#. translators: %s: CMS name with link
+#: inc/extra.php:98
+msgid " Powered By %s"
+msgstr ""
+
+#. translators: %s: CMS name with link
+#: inc/extra.php:98
+msgid "https://WordPress.org/"
+msgstr ""
+
+#: inc/extra.php:130
+msgid "Name*"
+msgstr ""
+
+#: inc/extra.php:130
+#: inc/extra.php:134
+msgid "Name"
+msgstr ""
+
+#: inc/extra.php:131
+msgid "Email*"
+msgstr ""
+
+#: inc/extra.php:131
+#: inc/extra.php:136
+msgid "Email"
+msgstr ""
+
+#: inc/extra.php:138
+msgid "Website"
+msgstr ""
+
+#: inc/extra.php:151
+msgid "Comment"
+msgstr ""
+
+#: inc/info.php:106
+msgid "Ignite Agency Portfolio PRO"
+msgstr ""
+
+#: inc/info.php:120
+msgid "Pro Available"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:88
+msgid ", "
+msgstr ""
+
+#: inc/widget-social-links.php:26
+msgid "TI: Social Links"
+msgstr ""
+
+#: inc/widget-social-links.php:27
+msgid "A Social Links Widget"
+msgstr ""
+
+#: inc/widget-social-links.php:57
+#: inc/widget-social-links.php:103
+msgid "Facebook"
+msgstr ""
+
+#: inc/widget-social-links.php:59
+#: inc/widget-social-links.php:108
+msgid "Instagram"
+msgstr ""
+
+#: inc/widget-social-links.php:61
+#: inc/widget-social-links.php:113
+msgid "Twitter"
+msgstr ""
+
+#: inc/widget-social-links.php:63
+#: inc/widget-social-links.php:118
+msgid "Pinterest"
+msgstr ""
+
+#: inc/widget-social-links.php:65
+msgid "Linkedin"
+msgstr ""
+
+#: inc/widget-social-links.php:67
+#: inc/widget-social-links.php:128
+msgid "YouTube"
+msgstr ""
+
+#: inc/widget-social-links.php:69
+#: inc/widget-social-links.php:133
+msgid "Tiktok"
+msgstr ""
+
+#: inc/widget-social-links.php:98
+msgid "Title"
+msgstr ""
+
+#: inc/widget-social-links.php:123
+msgid "LinkedIn"
+msgstr ""
+
+#: search.php:21
+msgid "Search Results"
+msgstr ""
+
+#. translators: %s: search query
+#: search.php:29
+#: search.php:55
+#: search.php:74
+#: search.php:100
+#: search.php:123
+#: search.php:156
+msgid "Search Results for \"%s\""
+msgstr ""
+
+#: search.php:51
+#: search.php:72
+#: search.php:98
+#: search.php:121
+#: search.php:154
+msgid "Search Result"
+msgstr ""
+
+#: sidebar.php:20
+msgid "firstsidebar"
+msgstr ""
+
+#: sidebar.php:21
+msgid "Search"
+msgstr ""
+
+#: sidebar.php:24
+msgid "Search for:"
+msgstr ""
+
+#: sidebar.php:25
+msgid "SEARCH ARTICLE"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Home Page"
+msgstr ""
+
+#. translators: %s: Name of current post.
+#: template-parts/content-audio.php:73
+#: template-parts/content-gallery.php:52
+#: template-parts/content-grid.php:66
+#: template-parts/content-image.php:43
+#: template-parts/content-single.php:35
+#: template-parts/content-video.php:73
+#: template-parts/content.php:65
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: template-parts/content-audio.php:80
+#: template-parts/content-gallery.php:59
+#: template-parts/content-grid.php:77
+#: template-parts/content-image.php:50
+#: template-parts/content-page.php:21
+#: template-parts/content-single.php:42
+#: template-parts/content-video.php:80
+#: template-parts/content.php:76
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content-grid.php:14
+#: template-parts/content.php:14
+msgid "Read More"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: %1$s: link to create a new post
+#: template-parts/content-none.php:23
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:27
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:33
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: woocommerce/checkout/form-checkout.php:26
+msgid "You must be logged in to checkout."
+msgstr ""
+
+#: woocommerce/checkout/form-checkout.php:32
+msgid "Checkout"
+msgstr ""
+
+#: woocommerce/checkout/form-checkout.php:54
+msgid "Your order"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:32
+msgid "Login"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:39
+msgid "Username or email address"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:39
+#: woocommerce/myaccount/form-login.php:43
+#: woocommerce/myaccount/form-login.php:79
+#: woocommerce/myaccount/form-login.php:86
+#: woocommerce/myaccount/form-login.php:93
+msgid "Required"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:43
+#: woocommerce/myaccount/form-login.php:93
+msgid "Password"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:51
+msgid "Remember me"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:54
+msgid "Log in"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:57
+msgid "Lost your password?"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:70
+#: woocommerce/myaccount/form-login.php:107
+msgid "Register"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:79
+msgid "Username"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:86
+msgid "Email address"
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:99
+msgid "A link to set a new password will be sent to your email address."
+msgstr ""
