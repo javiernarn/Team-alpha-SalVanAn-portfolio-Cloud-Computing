@@ -2,11 +2,11 @@
 /**
  * Plugin Name: SalValAn Portfolio
  * Description: Animated one-page portfolio for SalValAn. Home includes the team. Sections: About, Skills, Services, Projects, Experience, Contact. Dark and light mode, mobile tab bar, installable PWA.
- * Version: 4.0.4
+ * Version: 4.2.1
  * Author: SalValAn
  */
 if(!defined('ABSPATH'))exit;
-define('SVA_VER','4.0.4');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
+define('SVA_VER','4.2.1');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
 /* every section of the long home page, in scroll order (one file each in /sections) */
 const SVA_SECTIONS=['home','about','skills','services','projects','experience','contact'];
 /* the old v2 separate pages: they now redirect to their section on the home page */
@@ -19,13 +19,12 @@ function sva_fields(){return [
  'project_name'=>['Team project name','SalValAn Cloud Portfolio','Shown in the Projects section.'],
  'team_story'=>['Team story','Three graduating students from different groups joined forces for their Cloud Computing final project. Between us we cover analysis, code and documentation, so one team can take a system from first requirement to final manual.','About section.'],
  'mission'=>['Mission','Deliver systems that are well planned, well built and well documented.','About section.'],
- 'mariel_photo'=>['Mariel\'s photo (URL)','',"Upload to Media Library, then use the button. Empty shows her initials."],
  'form_shortcode'=>['Contact form shortcode','',"Optional. Paste a SureForms shortcode to replace the built-in email form."],
 ];}
 function sva_opt($k){$o=get_option('sva_opts',[]);$f=sva_fields();return (isset($o[$k])&&$o[$k]!=='')?$o[$k]:$f[$k][1];}
 
 function sva_tokens($h){
- $a=SVA_URL.'assets';$em=sva_opt('jonee_email');$yr=sva_opt('atms_year');$ph=sva_opt('mariel_photo');
+ $a=SVA_URL.'assets';$em=sva_opt('jonee_email');$yr=sva_opt('atms_year');$ph=$a.'/img/mariel.jpg';/* Mariel's photo is always the bundled file in assets/img, not a Media Library upload */
  $au=esc_url(sva_opt('atms_url'));$ah=esc_html(preg_replace('#^https?://#','',rtrim(sva_opt('atms_url'),'/')));
  $h=str_replace(['{{assets}}','{{project_name}}','{{team_story}}','{{mission}}','{{atms_year}}','{{atms_url}}','{{atms_host}}'],[$a,esc_html(sva_opt('project_name')),esc_html(sva_opt('team_story')),esc_html(sva_opt('mission')),esc_html($yr!==''?$yr:'Earlier project'),$au,$ah],$h);
  $h=preg_replace_callback('/\{\{av_mariel(?::(xl))?\}\}/',function($m)use($ph){$x=!empty($m[1])?' xl':'';
@@ -95,8 +94,8 @@ add_action('init',function(){
    'shortcuts'=>[['name'=>'Home','url'=>sva_url('home')],['name'=>'Projects','url'=>sva_url('projects')],['name'=>'Contact','url'=>sva_url('contact')]]],JSON_UNESCAPED_SLASHES);exit;}
  if($p==='/salvalan-sw'){
   header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: /');header('Cache-Control: no-cache');
-  $v=SVA_VER.'-'.filemtime(SVA_DIR.'assets/css/sva.css').filemtime(SVA_DIR.'assets/js/sva.js');
-  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg'];
+  $v=SVA_VER.'-'.filemtime(SVA_DIR.'assets/css/sva.css').filemtime(SVA_DIR.'assets/js/sva.js').filemtime(SVA_DIR.'assets/img/mariel.jpg').filemtime(SVA_DIR.'assets/img/diane.jpg').filemtime(SVA_DIR.'assets/img/jonee.jpg');
+  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg'];
   $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$core=[$hp?$hp:'/'];
   echo "const V='sva-$v',CORE=".wp_json_encode(array_values(array_unique($core))).",ASSETS=".wp_json_encode($as).",OFF=".wp_json_encode(($hp?$hp:'/').'salvalan-offline').";\n";
   echo <<<'JS'
@@ -139,8 +138,7 @@ add_action('admin_post_sva_reseed',function(){if(!current_user_can('manage_optio
 
 /* ---- settings page ---- */
 add_action('admin_menu',function(){add_options_page('SalValAn Portfolio','SalValAn','manage_options','salvalan','sva_settings');});
-add_action('admin_init',function(){register_setting('sva','sva_opts',['sanitize_callback'=>function($i){$o=[];foreach(sva_fields() as $k=>$f){$v=isset($i[$k])?wp_unslash($i[$k]):'';$o[$k]=in_array($k,['team_story','mission'])?sanitize_textarea_field($v):($k==='mariel_photo'?esc_url_raw($v):($k==='jonee_email'?sanitize_email($v):($k==='atms_url'?esc_url_raw($v):sanitize_text_field($v))));}return $o;}]);});
-add_action('admin_enqueue_scripts',function($h){if($h==='settings_page_salvalan')wp_enqueue_media();});
+add_action('admin_init',function(){register_setting('sva','sva_opts',['sanitize_callback'=>function($i){$o=[];foreach(sva_fields() as $k=>$f){$v=isset($i[$k])?wp_unslash($i[$k]):'';$o[$k]=in_array($k,['team_story','mission'])?sanitize_textarea_field($v):($k==='jonee_email'?sanitize_email($v):($k==='atms_url'?esc_url_raw($v):sanitize_text_field($v)));}return $o;}]);});
 function sva_settings(){$o=get_option('sva_opts',[]);?>
 <div class="wrap"><h1>SalValAn Portfolio</h1>
 <?php if(isset($_GET['reseeded']))echo '<div class="notice notice-success"><p>The Home page was rebuilt with the original design.</p></div>';?>
@@ -150,9 +148,8 @@ function sva_settings(){$o=get_option('sva_opts',[]);?>
 <tr><th><label for="sva_<?php echo esc_attr($k);?>"><?php echo esc_html($f[0]);?></label></th><td>
 <?php if(in_array($k,['team_story','mission'])):?><textarea class="large-text" rows="4" id="sva_<?php echo $k;?>" name="sva_opts[<?php echo $k;?>]" placeholder="<?php echo esc_attr($f[1]);?>"><?php echo esc_textarea($v);?></textarea>
 <?php else:?><input class="regular-text" id="sva_<?php echo $k;?>" name="sva_opts[<?php echo $k;?>]" value="<?php echo esc_attr($v);?>" placeholder="<?php echo esc_attr($f[1]);?>">
-<?php if($k==='mariel_photo'):?> <button type="button" class="button" id="sva_pick">Choose photo</button><?php endif;endif;?>
+<?php endif;?>
 <p class="description"><?php echo esc_html($f[2]);?></p></td></tr><?php endforeach;?></table><?php submit_button();?></form>
 <hr><h2>Rebuild the Home page</h2><p>Restores the Home page to the original long-scroll design (your own edits to that page will be replaced).</p>
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php'));?>"><input type="hidden" name="action" value="sva_reseed"><?php wp_nonce_field('sva_reseed');?><?php submit_button('Rebuild Home page','secondary','',false);?></form></div>
-<script>document.getElementById('sva_pick')&&document.getElementById('sva_pick').addEventListener('click',function(){var f=wp.media({title:'Choose photo',multiple:false,library:{type:'image'}});f.on('select',function(){document.getElementById('sva_mariel_photo').value=f.state().get('selection').first().toJSON().url});f.open()});</script>
 <?php }
