@@ -1,20 +1,22 @@
 <?php
 /**
  * Plugin Name: SalValAn Portfolio
- * Description: Animated one-page portfolio for SalValAn. Home includes the team. Sections: About, Skills, Services, Projects, Experience, Contact. Dark and light mode, mobile tab bar, installable PWA.
- * Version: 4.2.1
+ * Description: Animated one-page portfolio for SalValAn. Home includes the team. Sections: About, Skills & Services, Projects, Experience, Contact. Dark and light mode, mobile tab bar, installable PWA.
+ * Version: 4.4.0
  * Author: SalValAn
  */
 if(!defined('ABSPATH'))exit;
-define('SVA_VER','4.2.1');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
+define('SVA_VER','4.4.0');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
 /* every section of the long home page, in scroll order (one file each in /sections) */
-const SVA_SECTIONS=['home','about','skills','services','projects','experience','contact'];
+const SVA_SECTIONS=['home','about','services','projects','experience','contact'];
 /* the old v2 separate pages: they now redirect to their section on the home page */
 const SVA_LEGACY=['team','about','skills','services','projects','experience','contact'];
 
 function sva_fields(){return [
  'jonee_email'=>['Jonee\'s email','',"Shown in the Contact section. Leave empty to hide."],
  'atms_url'=>['ATMS live link','https://alumniappv2.ethiodeploy.app','Used by every ATMS button and link on the site.'],
+ 'occdl_url'=>['OCCDL live link','https://antiquina-ota.ethiodeploy.app','Used by the OCCDL button in Projects.'],
+ 'sclf_url'=>['SCLF live link','https://sclfapp.ethiodeploy.app','Used by the SCLF button in Projects.'],
  'atms_year'=>['Year ATMS was built','',"Example: 2025. Leave empty to show 'Earlier project'."],
  'project_name'=>['Team project name','SalValAn Cloud Portfolio','Shown in the Projects section.'],
  'team_story'=>['Team story','Three graduating students from different groups joined forces for their Cloud Computing final project. Between us we cover analysis, code and documentation, so one team can take a system from first requirement to final manual.','About section.'],
@@ -25,8 +27,8 @@ function sva_opt($k){$o=get_option('sva_opts',[]);$f=sva_fields();return (isset(
 
 function sva_tokens($h){
  $a=SVA_URL.'assets';$em=sva_opt('jonee_email');$yr=sva_opt('atms_year');$ph=$a.'/img/mariel.jpg';/* Mariel's photo is always the bundled file in assets/img, not a Media Library upload */
- $au=esc_url(sva_opt('atms_url'));$ah=esc_html(preg_replace('#^https?://#','',rtrim(sva_opt('atms_url'),'/')));
- $h=str_replace(['{{assets}}','{{project_name}}','{{team_story}}','{{mission}}','{{atms_year}}','{{atms_url}}','{{atms_host}}'],[$a,esc_html(sva_opt('project_name')),esc_html(sva_opt('team_story')),esc_html(sva_opt('mission')),esc_html($yr!==''?$yr:'Earlier project'),$au,$ah],$h);
+ $au=esc_url(sva_opt('atms_url'));$ou=esc_url(sva_opt('occdl_url'));$su=esc_url(sva_opt('sclf_url'));$ah=esc_html(preg_replace('#^https?://#','',rtrim(sva_opt('atms_url'),'/')));
+ $h=str_replace(['{{assets}}','{{project_name}}','{{team_story}}','{{mission}}','{{atms_year}}','{{atms_url}}','{{atms_host}}','{{occdl_url}}','{{sclf_url}}'],[$a,esc_html(sva_opt('project_name')),esc_html(sva_opt('team_story')),esc_html(sva_opt('mission')),esc_html($yr!==''?$yr:'Earlier project'),$au,$ah,$ou,$su],$h);
  $h=preg_replace_callback('/\{\{av_mariel(?::(xl))?\}\}/',function($m)use($ph){$x=!empty($m[1])?' xl':'';
   return $ph?'<img class="av'.$x.'" data-r="analyze" src="'.esc_url($ph).'" alt="Mariel Saldivar" width="240" height="240" loading="lazy">':'<span class="av mono'.$x.'" data-r="analyze" role="img" aria-label="Mariel Saldivar">MS</span>';},$h);
  if($em){$e=esc_attr($em);
@@ -34,7 +36,7 @@ function sva_tokens($h){
   $r2='<div class="row"><span>Email</span><a href="mailto:'.$e.'">'.esc_html($em).'</a><button type="button" class="btn sm alt" data-copy="'.$e.'">Copy</button></div>';
   $o='<option value="'.$e.'" data-k="jonee">Jonee John Antiquina · Programmer, Designer &amp; Developer</option>';
  }else{$r1=$r2=$o='';}
- $h=str_replace(['{{jonee_email_row}}','{{jonee_email_row2}}','{{opt_jonee}}','{{opt_mariel}}','{{opt_diane}}'],[$r1,$r2,$o,'<option value="occ.saldivar.mariel@gmail.com" data-k="mariel">Mariel Saldivar · Project Analyst</option>','<option value="dianejvalle@gmail.com" data-k="diane">Diane Valle · Technical Writer</option>'],$h);
+ $h=str_replace(['{{jonee_email_row}}','{{jonee_email_row2}}','{{opt_jonee}}','{{opt_mariel}}','{{opt_diane}}'],[$r1,$r2,$o,'<option value="occ.saldivar.mariel@gmail.com" data-k="mariel">Mariel Saldivar · Project Analyst</option>','<option value="occ.valle.dianejill@gmail.com" data-k="diane">Diane Valle · Technical Writer</option>'],$h);
  $sc=trim(sva_opt('form_shortcode'));
  if($sc!=='')$h=preg_replace('/<!--SVAFORM-->.*?<!--\/SVAFORM-->/s',do_shortcode($sc),$h);
  return $h;
@@ -59,7 +61,7 @@ add_action('template_redirect',function(){
  if(!$po||$po->post_name==='home'||!in_array($po->post_name,SVA_LEGACY,true)||!get_post_meta($po->ID,'_salvalan',true))return;
  $q=[];foreach(['to','service'] as $k){if(isset($_GET[$k]))$q[$k]=sanitize_text_field(wp_unslash($_GET[$k]));}
  $u=home_url('/');if($q)$u=add_query_arg($q,$u);
- wp_safe_redirect($u.'#'.($po->post_name==='team'?'home':$po->post_name),301);exit;
+ wp_safe_redirect($u.'#'.($po->post_name==='team'?'home':($po->post_name==='skills'?'services':$po->post_name)),301);exit;
 },1);
 
 /* ---- render with our own template (bypasses theme header/footer) ---- */
@@ -95,7 +97,7 @@ add_action('init',function(){
  if($p==='/salvalan-sw'){
   header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: /');header('Cache-Control: no-cache');
   $v=SVA_VER.'-'.filemtime(SVA_DIR.'assets/css/sva.css').filemtime(SVA_DIR.'assets/js/sva.js').filemtime(SVA_DIR.'assets/img/mariel.jpg').filemtime(SVA_DIR.'assets/img/diane.jpg').filemtime(SVA_DIR.'assets/img/jonee.jpg');
-  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg'];
+  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg',SVA_URL.'assets/img/ak-admin-web.jpg',SVA_URL.'assets/img/ak-mobile-home.jpg',SVA_URL.'assets/img/ak-mobile-login.jpg',SVA_URL.'assets/img/atms-home.jpg',SVA_URL.'assets/img/occdl-home.jpg',SVA_URL.'assets/img/sclf-home.jpg'];
   $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$core=[$hp?$hp:'/'];
   echo "const V='sva-$v',CORE=".wp_json_encode(array_values(array_unique($core))).",ASSETS=".wp_json_encode($as).",OFF=".wp_json_encode(($hp?$hp:'/').'salvalan-offline').";\n";
   echo <<<'JS'

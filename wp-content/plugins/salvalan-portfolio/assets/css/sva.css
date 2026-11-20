@@ -148,7 +148,6 @@ html{overflow-x:clip;text-rendering:optimizeLegibility;-webkit-text-size-adjust:
 @media(min-width:1600px){:root{--w:1400px}.sva{font-size:19px}.sva section{padding:clamp(70px,5vw,110px) 0}.crew{margin-inline:max(36px,calc((100vw - 1560px)/2))}}
 @media(min-width:2000px){:root{--w:1560px}.sva{font-size:20px}}
 
-@media(min-width:961px){#atms{display:grid;grid-template-columns:1fr auto;column-gap:32px;align-items:center}#atms>.tag,#atms>h3,#atms>p{grid-column:1}#atms>p{margin:0;max-width:60ch}#atms>.acts{grid-column:2;grid-row:1/4}}
 
 @media(max-width:700px){.sva{letter-spacing:0;font-size:16px;line-height:1.6}.sva h1,.sva h2,.sva h3,.sva h4{letter-spacing:0}.big{letter-spacing:.01em!important;line-height:1!important}.sva h2{line-height:1.08}.big .ln{padding-bottom:.1em}.outro{letter-spacing:0}.mi h3{line-height:1.2}}
 
@@ -166,3 +165,14 @@ html{overflow-x:clip;text-rendering:optimizeLegibility;-webkit-text-size-adjust:
 .sva a:link,.sva a:visited{-webkit-text-fill-color:currentColor}
 }
 @media(max-width:700px) and (max-height:600px){.mem,.crew:hover .mem:not(:hover),.mem:hover,.mem:focus-within{height:150px}.mem.on{min-height:340px}}
+
+/* merged skills and services rows */
+.row2{grid-template-columns:90px 1.2fr 1.6fr 30px}.row2 .chips{margin:0;gap:6px}.row2 .chips span{font-size:.78rem;padding:4px 11px;transition:border-color .3s}.row2:hover .chips span{border-color:rgba(255,255,255,.7)}
+@media(max-width:960px){.row2{grid-template-columns:70px 1fr 24px;row-gap:10px}.row2 .chips{grid-column:2/3;grid-row:2}.row2 svg{grid-row:1;grid-column:3}}
+/* project screenshots */
+.two.sm{align-items:start}.shot{margin:16px 0 0}.shot a{display:block;border-radius:14px;overflow:hidden;border:1.5px solid var(--ln);background:var(--card)}.shot img{width:100%;height:auto;transition:transform .5s var(--ease)}.shot a:hover img{transform:scale(1.03)}.shot figcaption{font-size:.8rem;color:var(--mut);margin-top:8px}
+.phones{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.phones .shot{margin-top:16px}
+
+/* project cards with a screenshot beside the text */
+.pc.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,48px);align-items:center}.pc.split .shot{margin:0}.pc.split .pt p{max-width:52ch}.pc.split .ck{margin-bottom:18px}.pc.split .ck b{font-weight:700}
+@media(max-width:960px){.pc.split{grid-template-columns:minmax(0,1fr)}.pc.split .shot{order:-1}}
