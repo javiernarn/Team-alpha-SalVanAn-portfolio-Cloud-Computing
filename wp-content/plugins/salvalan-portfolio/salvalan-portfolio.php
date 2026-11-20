@@ -6,7 +6,7 @@
  * Author: SalValAn
  */
 if(!defined('ABSPATH'))exit;
-define('SVA_VER','4.4.0');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
+define('SVA_VER','4.4.1');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
 /* every section of the long home page, in scroll order (one file each in /sections) */
 const SVA_SECTIONS=['home','about','services','projects','experience','contact'];
 /* the old v2 separate pages: they now redirect to their section on the home page */
@@ -72,6 +72,8 @@ add_action('wp_enqueue_scripts',function(){
  wp_enqueue_script('sva',SVA_URL.'assets/js/sva.js',[],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva.js'),true);
  $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$hp=$hp?$hp:'/';wp_add_inline_script('sva','window.SVA={sw:'.wp_json_encode($hp.'salvalan-sw').',scope:'.wp_json_encode($hp).'};','before');
 },99);
+/* hyphenation needs the right language: the page text is English, so declare it */
+add_filter('language_attributes',function($o){return sva_is_page()?'lang="en"':$o;},99);
 add_action('after_setup_theme',function(){add_theme_support('title-tag');});
 add_filter('pre_get_document_title',function($t){return sva_is_page()?'SalValAn Portfolio · Build. Analyze. Document.':$t;},99);
 const SVA_DESC='SalValAn: Jonee Antiquina (developer), Mariel Saldivar (project analyst) and Diane Valle (technical writer). Build. Analyze. Document.';

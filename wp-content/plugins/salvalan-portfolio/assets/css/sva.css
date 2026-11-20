@@ -176,3 +176,79 @@ html{overflow-x:clip;text-rendering:optimizeLegibility;-webkit-text-size-adjust:
 /* project cards with a screenshot beside the text */
 .pc.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,48px);align-items:center}.pc.split .shot{margin:0}.pc.split .pt p{max-width:52ch}.pc.split .ck{margin-bottom:18px}.pc.split .ck b{font-weight:700}
 @media(max-width:960px){.pc.split{grid-template-columns:minmax(0,1fr)}.pc.split .shot{order:-1}}
+
+/* ==========================================================================
+   Clean text: justified body copy + safe long words
+   Applies everywhere: phone, installed PWA, browser, laptop, desktop.
+   Needs <html lang="en"> so the browser hyphenates with English rules
+   (the plugin now forces this on the portfolio page).
+   ========================================================================== */
+
+/* 1. Safety net: a very long word, email or URL can never push the layout sideways */
+.sva{overflow-wrap:break-word;word-wrap:break-word}
+.sva .two>*,.sva .cols>*,.sva .stack>*,.sva .prj>*,.sva .pc>*,.sva .pt,.sva .tl li>*,.sva .idr>div,.sva .row2>*,.sva .mi,.sva .more,.sva .phones>*{min-width:0}
+
+/* 2. Long text is justified and hyphenated at word syllables, so both edges stay straight
+      without wide gaps between words */
+.sva p,.sva .ck li,.sva .big2{
+  text-align:justify;text-align-last:left;text-justify:inter-word;
+  -webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto;
+  -webkit-hyphenate-limit-before:3;-webkit-hyphenate-limit-after:3;hyphenate-limit-chars:5 2 3;hyphenate-limit-lines:2;word-spacing:-.02em;
+  overflow-wrap:break-word;word-break:normal;text-wrap:wrap;
+}
+
+/* 3. Short text stays left aligned: stretching one short line would look wrong */
+.sva .sub,.sva .role,.sva .kick,.sva .tag,.sva .f>p,.sva .toast,.sva .shot figcaption{text-align:left;text-align-last:left;-webkit-hyphens:manual;hyphens:manual}
+
+/* 4. Headings, titles and labels: never hyphenated, balanced line lengths, a too-long word still wraps */
+.sva h1,.sva h2,.sva h3,.sva h4,.sva .row2 b,.sva .tl time,.sva .flow b,.sva .vw,.sva .ttl{-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word;word-break:normal}
+.sva h2,.sva h3,.sva h4,.sva .row2 b,.sva .tl h3{text-wrap:balance}
+.sva .sub{text-wrap:balance}
+
+/* 5. Pills, chips and buttons: wrap instead of clipping when the label is longer than the screen */
+.sva .chips span,.sva .flow.sm span{white-space:normal;max-width:100%;overflow-wrap:anywhere;-webkit-hyphens:manual;hyphens:manual}
+.sva .chips span{text-align:center}
+.sva .btn{max-width:100%;text-align:center;overflow-wrap:anywhere}
+
+/* 6. Rows: columns may shrink below their content (prevents blow-out), so a long title cannot cut off its neighbour */
+.row2{grid-template-columns:90px minmax(0,1.2fr) minmax(0,1.6fr) 30px}
+@media(max-width:960px){.row2{grid-template-columns:70px minmax(0,1fr) 24px}}
+.sva .row a,.sva .row .val{overflow-wrap:anywhere;word-break:normal;text-align:left;-webkit-hyphens:manual;hyphens:manual}
+.sva .row a[href^=mailto]{overflow-wrap:anywhere}
+
+/* 6b. The two A & K columns (web and mobile) stack at 960px like every other two-column block, so their text is never squeezed into ~250px columns */
+@media(max-width:960px){.two.sm{grid-template-columns:minmax(0,1fr)}.phones{max-width:520px}}
+
+/* 7. Form: a long option such as "Name · Role" is shortened with an ellipsis inside the select */
+.sva .f select{text-overflow:ellipsis;max-width:100%;min-width:0}
+.sva .f label{min-width:0}
+
+/* 8. Phones and small tablets: narrow columns need more break points and tighter natural spacing,
+      otherwise justified lines get big gaps */
+@media(max-width:700px){
+  .sva p,.sva .ck li{hyphenate-limit-chars:5 2 2;word-spacing:-.03em}
+  .sva .ck li{font-size:.95rem;line-height:1.5;padding-left:19px}
+  .sva .ck li:before{width:10px}
+  .sva .pc{padding:20px 18px}
+}
+@media(max-width:380px){
+  .sva .ck li{font-size:.92rem}
+  .sva .pc{padding:18px 15px}
+}
+
+/* 8b. The large About statement is display type: only long words may hyphenate (never "sys-tem"),
+       and it is a little smaller on phones so more words fit on each justified line */
+.sva .big2{hyphenate-limit-chars:8 3 3;word-spacing:0}
+@media(max-width:700px){.sva .big2{font-size:1.15rem;line-height:1.45}}
+@media(max-width:380px){.sva .big2{font-size:1.05rem}}
+
+/* 9. Wide screens: cap the line length of long text so justified lines never look stretched */
+@media(min-width:1000px){.sva .pc.split .pt p,.sva .feat p{max-width:60ch}}
+
+/* OCC seal watermark (same asset/opacity as alumni public footer) */
+.hero::before{content:"";background:url("../img/occ-seal.png") center/contain no-repeat;position:absolute;z-index:0;pointer-events:none;opacity:.2;aspect-ratio:1;width:clamp(260px,min(34vw,64vh),520px);right:max(24px,calc((100vw - 1240px)/2));top:clamp(120px,19vh,200px);filter:none}
+html:not([data-theme=dark]) .hero::before{filter:brightness(0);opacity:.09}
+.hero .wrap,.hero .crew,.hero .mq{position:relative;z-index:1}
+@media(max-width:960px){.hero::before{right:50%;top:96px;transform:translateX(50%);width:clamp(240px,80vw,400px);opacity:.16}html:not([data-theme=dark]) .hero::before{opacity:.08}}
+/* About: remove desktop dead space */
+@media(min-width:961px){#about .two{grid-template-columns:1fr;gap:clamp(24px,3vw,40px)}#about .two>.rv:last-child{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr;grid-auto-flow:column;column-gap:clamp(28px,6vw,80px)}#about .big2{max-width:none}}
