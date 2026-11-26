@@ -1,0 +1,74 @@
+/* SalValAn v6.2 FX layer. Motion-only parts are scoped to html.mo (set only when GSAP loaded and the visitor allows motion). */
+
+/* ---- call to action: readable and solid without motion, outlined letters with it ---- */
+.sva .cta{padding:clamp(70px,10vw,140px) 0 0!important;overflow:hidden}
+.cta .cta0{margin:0 0 clamp(10px,2vw,22px);font:700 .8rem var(--bd);letter-spacing:.3em;text-transform:uppercase;color:var(--mut)}
+.ctl{display:flex;align-items:center;gap:clamp(14px,3vw,40px);width:fit-content;max-width:100%;color:var(--ink);text-decoration:none}
+.ctl .tx{display:block;min-width:0;font:700 clamp(2.8rem,10.5vw,10rem)/1.02 var(--hd);letter-spacing:-.04em}
+.ctl .ar{flex:none;display:grid;place-items:center;width:clamp(56px,9vw,128px);aspect-ratio:1;border-radius:50%;border:1.5px solid var(--ink);transition:transform .7s var(--ease),background .4s,color .4s}
+.ctl .ar svg{width:42%;height:42%}
+.ctl:hover .ar,.ctl:focus-visible .ar{transform:rotate(-45deg);background:var(--ink);color:var(--bg)}
+.ctm{display:none}
+html.mo .ctm{display:block;margin-top:clamp(40px,6vw,90px);border-block:1.5px solid var(--ln);overflow:hidden;padding:clamp(12px,2vw,22px) 0}
+.ctt{display:flex;width:max-content}
+.cg{display:flex;align-items:center;flex:none}
+.cg span{font:700 clamp(1.4rem,4vw,3.4rem)/1.1 var(--hd);letter-spacing:-.02em;padding:0 .5em;color:var(--c)}
+.cg i{flex:none;width:.5em;height:.5em;font-size:clamp(1.4rem,4vw,3.4rem);background:var(--ink);opacity:.5;transform:rotate(45deg) scale(.55)}
+html.mo .ctl .ch{color:transparent;-webkit-text-stroke:1.5px var(--ink);transition:color .45s,-webkit-text-stroke-color .45s}
+html.mo .ctl:hover .ch,html.mo .ctl:focus-visible .ch{color:var(--k,var(--ink));-webkit-text-stroke-color:var(--k,var(--ink))}
+
+/* ---- numbered eyebrows ---- */
+.eb{display:flex;align-items:center;gap:14px;margin:0 0 14px;overflow:hidden;font:700 .78rem var(--bd);letter-spacing:.28em;text-transform:uppercase;color:var(--mut)}
+.eb b{display:inline-block;color:var(--ink);font-variant-numeric:tabular-nums}
+.eb i{display:block;flex:none;width:clamp(36px,8vw,96px);height:1.5px;background:currentColor;opacity:.6}
+.eb span{display:inline-block}
+
+/* ---- services: floating preview ---- */
+.pv{position:fixed;left:0;top:0;z-index:150;width:clamp(240px,24vw,360px);aspect-ratio:16/10;border-radius:12px;overflow:hidden;pointer-events:none;visibility:hidden;opacity:0;border:2px solid var(--c,var(--ink));background:var(--sf);box-shadow:0 30px 80px -20px rgba(0,0,0,.55)}
+.pv img{display:block;width:100%;height:100%;object-fit:cover}
+@media(hover:none),(prefers-reduced-motion:reduce){.pv{display:none!important}}
+
+/* ---- screenshots in a browser window ---- */
+.shot .bar{display:flex;align-items:center;gap:6px;position:relative;z-index:3;padding:9px 12px;background:var(--sf);border-bottom:1.5px solid var(--ln)}
+.shot .bar i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--build)}
+.shot .bar i:nth-child(2){background:var(--analyze)}.shot .bar i:nth-child(3){background:var(--doc)}
+.shot .bar em{flex:1;min-width:0;margin-left:8px;padding:3px 12px;border-radius:99px;background:var(--bg);color:var(--mut);font:600 .72rem var(--bd);font-style:normal;letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---- timeline that draws itself ---- */
+html.mo .tl{position:relative;--tp:clamp(26px,3.4vw,40px);padding:0 0 0 var(--tp);list-style:none}
+html.mo .tl li{position:relative}
+.tl .tlp{position:absolute;left:5px;top:0;bottom:0;width:2px;border-radius:2px;background:linear-gradient(var(--build),var(--analyze),var(--doc));transform-origin:50% 0}
+.tl .dt{position:absolute;left:calc(-1*var(--tp));top:24px;z-index:1;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--ln);transition:transform .6s var(--ease),background .4s,border-color .4s,box-shadow .6s}
+.tl li.on .dt{transform:scale(1.25);background:var(--c);border-color:var(--c);box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}
+
+/* ---- scroll cue and clock ---- */
+.cue{position:fixed;left:clamp(14px,1.8vw,28px);bottom:28px;z-index:80;display:flex;align-items:center;gap:12px;writing-mode:vertical-rl;color:var(--mut);font:700 .68rem var(--bd);letter-spacing:.3em;text-transform:uppercase;pointer-events:none;transition:opacity .5s}
+.cue.hide{opacity:0}
+.cue>*{animation:cueIn 1s 2.8s both var(--ease)}
+.cue i{display:block;width:1.5px;height:56px;background:linear-gradient(var(--ink) 50%,transparent 50%) 0 0/100% 200%;opacity:.5;animation:cueIn 1s 2.8s both var(--ease),cueRun 1.8s 3.8s infinite var(--ease)}
+@keyframes cueIn{from{opacity:0;transform:translateY(16px)}}
+@keyframes cueRun{to{background-position:0 -200%}}
+@media(max-width:960px),(hover:none){.cue{display:none}}
+.clk{display:inline-flex;align-items:center;gap:8px}.clk:before{content:"";width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:clkp 2s infinite;margin-left:8px}
+@keyframes clkp{70%{box-shadow:0 0 0 8px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+@media(prefers-reduced-motion:reduce){.cue,.eb,.tl .tlp,.tl .dt{display:none!important}.clk:before{animation:none}}
+
+/* ---- background music button: pause icon while playing, play icon while paused ---- */
+.snd{position:relative}
+.snd .pl{display:inline}.snd .ps{display:none}
+.snd.on .pl{display:none}.snd.on .ps{display:inline}
+
+/* ---- Enter screen (the tap that lets the browser play music) ---- */
+.gate{display:none}
+html.sva-gate{overflow:hidden}
+html.sva-gate .gate,.gate.out{display:grid;position:fixed;inset:0;z-index:600;place-items:center;background:#0B0B0F;color:#F3EEE4;transition:opacity .8s ease,visibility .8s}
+.gate.out{opacity:0;visibility:hidden;pointer-events:none}
+.gate .gi{display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;text-align:center}
+.gate svg{width:64px;height:64px;margin-bottom:4px}
+.gate b{font:700 1.6rem var(--hd);letter-spacing:.02em}
+.gate span{font-size:.95rem;opacity:.7}
+.gate .go{margin-top:14px;min-width:190px;padding:14px 34px;border:0;border-radius:999px;background:#F3EEE4;color:#0B0B0F;font:700 1rem var(--hd);letter-spacing:.04em;cursor:pointer;transition:transform .25s ease}
+.gate .go:hover{transform:scale(1.05)}.gate .go:focus-visible,.gate .no:focus-visible{outline:2px solid #F3EEE4;outline-offset:4px}
+.gate .no{border:0;background:none;color:#F3EEE4;opacity:.6;font:500 .85rem var(--bd,inherit);text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:6px}
+.gate .no:hover{opacity:1}
+@media(prefers-reduced-motion:reduce){.gate,.gate.out{transition:none}}

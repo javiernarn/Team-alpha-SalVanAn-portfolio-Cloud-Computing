@@ -45,6 +45,7 @@ function glide(y){
  var max=Math.max(0,h.scrollHeight-innerHeight);y=Math.max(0,Math.min(y,max));
  var y0=scrollY,dist=y-y0;
  if(Math.abs(dist)<2||rm.matches){scrollTo(0,y);tick();return}
+ if(window.SVAMO&&SVAMO.lenis){gl=true;SVAMO.lenis.scrollTo(y,{duration:Math.min(1.8,Math.max(.8,Math.abs(dist)/2200)),easing:function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2},force:true,onComplete:function(){gl=false;spy()}});return}
  gl=true;var dur=Math.min(1100,Math.max(450,Math.abs(dist)*.4)),t0=0;
  function step(t){
   if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur);
@@ -57,7 +58,7 @@ function glideTo(t,id){
  var off=parseFloat(getComputedStyle(h).scrollPaddingTop)||70;
  glide(id==='home'?0:t.getBoundingClientRect().top+scrollY-off);
 }
-['wheel','touchstart','mousedown','keydown'].forEach(function(n){addEventListener(n,function(e){if(anim&&!(n==='keydown'&&e.key==='Escape'))stopGlide()},{passive:true})});
+['wheel','touchstart','mousedown','keydown'].forEach(function(n){addEventListener(n,function(e){if((anim||gl)&&!(n==='keydown'&&e.key==='Escape'))stopGlide()},{passive:true})});
 /* every in-page link (header, drawer, tab bar, buttons, footer) goes through the glide */
 d.addEventListener('click',function(e){
  var a=e.target.closest&&e.target.closest('a[href^="#"]');
@@ -76,7 +77,7 @@ addEventListener('load',function(){var i=location.hash.slice(1),t=i&&d.getElemen
 
 /* reveal on scroll */
 h.classList.add('js');
-if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+if(window.SVAMO){/* sva-motion.js animates the reveals */}else if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var t=e.target;t.classList.add('in');io.unobserve(t);setTimeout(function(){t.classList.remove('rv','in')},1300)}})},{rootMargin:'0px 0px -8% 0px',threshold:.05});
  $$('.rv').forEach(function(el){io.observe(el)});
 }else{$$('.rv').forEach(function(el){el.classList.remove('rv')})}

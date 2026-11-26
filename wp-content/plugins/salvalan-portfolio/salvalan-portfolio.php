@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: SalValAn Portfolio
- * Description: Animated one-page portfolio for SalValAn. Home includes the team. Sections: About, Skills & Services, Projects, Experience, Contact. Dark and light mode, mobile tab bar, installable PWA.
- * Version: 4.4.0
+ * Description: Cinematic motion one-page portfolio (GSAP, ScrollTrigger, Lenis, SplitText, Flip, WebGL aurora hero, film-camera showreel, end credits, project preview, self-drawing timeline, giant call to action, background music) for SalValAn. Home includes the team. Sections: Showreel, About, Skills & Services, Projects, Experience, Contact. Dark and light mode, mobile tab bar, installable PWA.
+ * Version: 6.3.3
  * Author: SalValAn
  */
 if(!defined('ABSPATH'))exit;
-define('SVA_VER','4.4.1');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
+define('SVA_VER','6.3.3');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
 /* every section of the long home page, in scroll order (one file each in /sections) */
-const SVA_SECTIONS=['home','about','services','projects','experience','contact'];
+const SVA_SECTIONS=['home','reel','band','about','services','projects','experience','cta','contact','credits'];
 /* the old v2 separate pages: they now redirect to their section on the home page */
 const SVA_LEGACY=['team','about','skills','services','projects','experience','contact'];
 
@@ -21,6 +21,8 @@ function sva_fields(){return [
  'project_name'=>['Team project name','SalValAn Cloud Portfolio','Shown in the Projects section.'],
  'team_story'=>['Team story','Three graduating students from different groups joined forces for their Cloud Computing final project. Between us we cover analysis, code and documentation, so one team can take a system from first requirement to final manual.','About section.'],
  'mission'=>['Mission','Deliver systems that are well planned, well built and well documented.','About section.'],
+ 'reel_video'=>['Showreel video (optional)','',"Paste the link of an MP4 file (upload it in Media > Add New, then copy its URL). It plays softly behind the opening card of the Showreel. Keep it under 8 MB. Leave empty for no video."],
+ 'music_url'=>['Background music (optional)','',"Leave empty to use the built-in track (Sunburst by Tobu & Itro). To use your own, upload an MP3 in Media > Add New and paste its link here. Type off to remove the music button."],
  'form_shortcode'=>['Contact form shortcode','',"Optional. Paste a SureForms shortcode to replace the built-in email form."],
 ];}
 function sva_opt($k){$o=get_option('sva_opts',[]);$f=sva_fields();return (isset($o[$k])&&$o[$k]!=='')?$o[$k]:$f[$k][1];}
@@ -37,6 +39,8 @@ function sva_tokens($h){
   $o='<option value="'.$e.'" data-k="jonee">Jonee John Antiquina · Programmer, Designer &amp; Developer</option>';
  }else{$r1=$r2=$o='';}
  $h=str_replace(['{{jonee_email_row}}','{{jonee_email_row2}}','{{opt_jonee}}','{{opt_mariel}}','{{opt_diane}}'],[$r1,$r2,$o,'<option value="occ.saldivar.mariel@gmail.com" data-k="mariel">Mariel Saldivar · Project Analyst</option>','<option value="occ.valle.dianejill@gmail.com" data-k="diane">Diane Valle · Technical Writer</option>'],$h);
+ $rv=esc_url(sva_opt('reel_video'));
+ $h=str_replace('{{reel_video}}',$rv?'<video src="'.$rv.'" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>':'',$h);
  $sc=trim(sva_opt('form_shortcode'));
  if($sc!=='')$h=preg_replace('/<!--SVAFORM-->.*?<!--\/SVAFORM-->/s',do_shortcode($sc),$h);
  return $h;
@@ -69,8 +73,18 @@ add_filter('template_include',function($t){return sva_is_page()?SVA_DIR.'templat
 add_action('wp_enqueue_scripts',function(){
  if(!sva_is_page())return;
  wp_enqueue_style('sva',SVA_URL.'assets/css/sva.css',[],SVA_VER.'.'.filemtime(SVA_DIR.'assets/css/sva.css'));
- wp_enqueue_script('sva',SVA_URL.'assets/js/sva.js',[],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva.js'),true);
- $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$hp=$hp?$hp:'/';wp_add_inline_script('sva','window.SVA={sw:'.wp_json_encode($hp.'salvalan-sw').',scope:'.wp_json_encode($hp).'};','before');
+ wp_enqueue_style('sva-motion',SVA_URL.'assets/css/sva-motion.css',['sva'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/css/sva-motion.css'));
+ wp_enqueue_style('sva-fx',SVA_URL.'assets/css/sva-fx.css',['sva-motion'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/css/sva-fx.css'));
+ wp_enqueue_style('sva-fx2',SVA_URL.'assets/css/sva-fx2.css',['sva-fx'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/css/sva-fx2.css'));
+ foreach(['gsap'=>'gsap.min.js','sva-st'=>'ScrollTrigger.min.js','sva-lenis'=>'lenis.min.js'] as $k=>$f)wp_enqueue_script($k,SVA_URL.'assets/js/vendor/'.$f,$k==='sva-st'?['gsap']:[],'vendor',true);
+ wp_enqueue_script('sva-motion',SVA_URL.'assets/js/sva-motion.js',['gsap','sva-st','sva-lenis'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-motion.js'),true);
+ foreach(['sva-split'=>'SplitText.min.js','sva-scr'=>'ScrambleTextPlugin.min.js','sva-flip'=>'Flip.min.js'] as $k=>$f)wp_enqueue_script($k,SVA_URL.'assets/js/vendor/'.$f,['gsap'],'vendor',true);
+ wp_enqueue_script('sva-fx',SVA_URL.'assets/js/sva-fx.js',['sva-motion','sva-split','sva-scr','sva-flip'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-fx.js'),true);
+ wp_enqueue_script('sva-fx2',SVA_URL.'assets/js/sva-fx2.js',['sva-fx'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-fx2.js'),true);
+ wp_enqueue_script('sva',SVA_URL.'assets/js/sva.js',['sva-fx2'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva.js'),true);
+ wp_enqueue_script('sva-sound',SVA_URL.'assets/js/sva-sound.js',['sva'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-sound.js'),true);
+ $mu=sva_opt('music_url');$mu=$mu===''?SVA_URL.'assets/audio/sunburst.mp3':($mu==='off'?'':$mu);
+ $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$hp=$hp?$hp:'/';wp_add_inline_script('sva','window.SVA={sw:'.wp_json_encode($hp.'salvalan-sw').',scope:'.wp_json_encode($hp).',music:'.wp_json_encode($mu).'};','before');
 },99);
 /* hyphenation needs the right language: the page text is English, so declare it */
 add_filter('language_attributes',function($o){return sva_is_page()?'lang="en"':$o;},99);
@@ -84,7 +98,7 @@ add_action('wp_head',function(){
 add_action('wp_head',function(){
  if(!sva_is_page())return;
  echo '<meta name="theme-color" content="#0B0B0F"><link rel="manifest" href="'.esc_url(home_url('/salvalan-manifest')).'"><link rel="apple-touch-icon" href="'.esc_url(SVA_URL.'assets/img/apple-touch-icon.png').'"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="color-scheme" content="dark light"><meta name="apple-mobile-web-app-title" content="SVA"><link rel="icon" type="image/png" href="'.esc_url(SVA_URL.'assets/img/icon-192.png').'"><link rel="preload" as="font" type="font/woff2" crossorigin href="'.esc_url(SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2').'"><link rel="preload" as="font" type="font/woff2" crossorigin href="'.esc_url(SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2').'">';
- echo '<script>(function(){try{var t=localStorage.getItem("sva-theme");if(!t)t="dark";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>';
+ echo '<script>(function(){try{var t=localStorage.getItem("sva-theme");if(!t)t="dark";document.documentElement.setAttribute("data-theme",t)}catch(e){}try{var h=document.documentElement;if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&localStorage.getItem("sva-motion")!=="off"){h.classList.add("mo");if(!sessionStorage.getItem("sva-pre"))h.classList.add("mo-pre")}}catch(e){}'.(sva_opt('music_url')==='off'?'':'try{if(localStorage.getItem("sva-music")!=="off"){var g=document.documentElement;g.classList.add("sva-gate");setTimeout(function(){if(g.classList.contains("sva-gate")){g.classList.remove("sva-gate");document.dispatchEvent(new Event("sva:enter"))}},15000)}}catch(e){}').'})()</script>';
 },1);
 
 /* ---- PWA: manifest, service worker, offline page (extension-less so any host serves them) ---- */
@@ -98,8 +112,8 @@ add_action('init',function(){
    'shortcuts'=>[['name'=>'Home','url'=>sva_url('home')],['name'=>'Projects','url'=>sva_url('projects')],['name'=>'Contact','url'=>sva_url('contact')]]],JSON_UNESCAPED_SLASHES);exit;}
  if($p==='/salvalan-sw'){
   header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: /');header('Cache-Control: no-cache');
-  $v=SVA_VER.'-'.filemtime(SVA_DIR.'assets/css/sva.css').filemtime(SVA_DIR.'assets/js/sva.js').filemtime(SVA_DIR.'assets/img/mariel.jpg').filemtime(SVA_DIR.'assets/img/diane.jpg').filemtime(SVA_DIR.'assets/img/jonee.jpg');
-  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg',SVA_URL.'assets/img/ak-admin-web.jpg',SVA_URL.'assets/img/ak-mobile-home.jpg',SVA_URL.'assets/img/ak-mobile-login.jpg',SVA_URL.'assets/img/atms-home.jpg',SVA_URL.'assets/img/occdl-home.jpg',SVA_URL.'assets/img/sclf-home.jpg'];
+  $v=SVA_VER.'-'.filemtime(SVA_DIR.'assets/css/sva.css').filemtime(SVA_DIR.'assets/js/sva.js').filemtime(SVA_DIR.'assets/js/sva-motion.js').filemtime(SVA_DIR.'assets/css/sva-motion.css').filemtime(SVA_DIR.'assets/js/sva-fx.js').filemtime(SVA_DIR.'assets/css/sva-fx.css').filemtime(SVA_DIR.'assets/js/sva-fx2.js').filemtime(SVA_DIR.'assets/css/sva-fx2.css').filemtime(SVA_DIR.'assets/js/sva-sound.js').filemtime(SVA_DIR.'assets/img/mariel.jpg').filemtime(SVA_DIR.'assets/img/diane.jpg').filemtime(SVA_DIR.'assets/img/jonee.jpg');
+  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/js/sva-motion.js',SVA_URL.'assets/css/sva-motion.css',SVA_URL.'assets/js/sva-fx.js',SVA_URL.'assets/css/sva-fx.css',SVA_URL.'assets/js/sva-fx2.js',SVA_URL.'assets/css/sva-fx2.css',SVA_URL.'assets/js/sva-sound.js',SVA_URL.'assets/js/vendor/SplitText.min.js',SVA_URL.'assets/js/vendor/ScrambleTextPlugin.min.js',SVA_URL.'assets/js/vendor/Flip.min.js',SVA_URL.'assets/js/vendor/gsap.min.js',SVA_URL.'assets/js/vendor/ScrollTrigger.min.js',SVA_URL.'assets/js/vendor/lenis.min.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg',SVA_URL.'assets/img/ak-admin-web.jpg',SVA_URL.'assets/img/ak-mobile-home.jpg',SVA_URL.'assets/img/ak-mobile-login.jpg',SVA_URL.'assets/img/atms-home.jpg',SVA_URL.'assets/img/occdl-home.jpg',SVA_URL.'assets/img/sclf-home.jpg'];
   $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$core=[$hp?$hp:'/'];
   echo "const V='sva-$v',CORE=".wp_json_encode(array_values(array_unique($core))).",ASSETS=".wp_json_encode($as).",OFF=".wp_json_encode(($hp?$hp:'/').'salvalan-offline').";\n";
   echo <<<'JS'
@@ -142,7 +156,7 @@ add_action('admin_post_sva_reseed',function(){if(!current_user_can('manage_optio
 
 /* ---- settings page ---- */
 add_action('admin_menu',function(){add_options_page('SalValAn Portfolio','SalValAn','manage_options','salvalan','sva_settings');});
-add_action('admin_init',function(){register_setting('sva','sva_opts',['sanitize_callback'=>function($i){$o=[];foreach(sva_fields() as $k=>$f){$v=isset($i[$k])?wp_unslash($i[$k]):'';$o[$k]=in_array($k,['team_story','mission'])?sanitize_textarea_field($v):($k==='jonee_email'?sanitize_email($v):($k==='atms_url'?esc_url_raw($v):sanitize_text_field($v)));}return $o;}]);});
+add_action('admin_init',function(){register_setting('sva','sva_opts',['sanitize_callback'=>function($i){$o=[];foreach(sva_fields() as $k=>$f){$v=isset($i[$k])?wp_unslash($i[$k]):'';$o[$k]=$k==='music_url'?(strtolower(trim($v))==='off'?'off':esc_url_raw($v)):(in_array($k,['team_story','mission'])?sanitize_textarea_field($v):($k==='jonee_email'?sanitize_email($v):(in_array($k,['atms_url','reel_video'],true)?esc_url_raw($v):sanitize_text_field($v))));}return $o;}]);});
 function sva_settings(){$o=get_option('sva_opts',[]);?>
 <div class="wrap"><h1>SalValAn Portfolio</h1>
 <?php if(isset($_GET['reseeded']))echo '<div class="notice notice-success"><p>The Home page was rebuilt with the original design.</p></div>';?>

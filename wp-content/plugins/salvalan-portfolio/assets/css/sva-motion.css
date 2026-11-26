@@ -1,0 +1,40 @@
+/* SalValAn cinematic motion layer. Everything here is scoped to html.mo, which is only set when GSAP loaded and the visitor allows motion. */
+/* showreel: stacked and readable without motion, a pinned film stage with it */
+.reel{padding:0!important}.reel .stage{position:relative;background:#000;color:#fff}
+.reel .fr{margin:0;position:relative}.reel .fr img{width:100%;height:auto}.reel figcaption{padding:18px clamp(16px,4vw,36px)}
+.reel .card0{padding:clamp(60px,12vw,140px) clamp(16px,4vw,36px);text-align:center}.reel .lb{display:none}
+.reel figcaption span,.reel .card0 span{display:block;font:700 .8rem var(--bd);letter-spacing:.3em;text-transform:uppercase;opacity:.75}
+.reel figcaption b,.reel .card0 b{display:block;font:700 clamp(2rem,7vw,6rem)/1 var(--hd);letter-spacing:-.02em}.reel figcaption em,.reel .card0 em{font-style:normal;opacity:.8}
+.reel .fr[data-r] figcaption span{color:var(--c)}
+html.mo .reel .stage{height:100vh;height:100svh;overflow:hidden}
+html.mo .reel .frames{position:absolute;inset:0}
+html.mo .reel .fr{position:absolute;inset:0;opacity:0;display:grid;place-items:center}
+html.mo .reel .fr:first-child{opacity:1}
+html.mo .reel .fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05)}
+html.mo .reel .fr:not(.tc0):after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 55%),radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.6))}
+html.mo .reel figcaption{position:absolute;z-index:2;left:clamp(16px,5vw,64px);bottom:calc(14vh + 24px);padding:0}
+html.mo .reel .card0{position:relative;z-index:2}
+html.mo .reel .lb{display:flex;position:absolute;left:0;right:0;z-index:3;background:#000;height:12vh;align-items:center;justify-content:space-between;padding:0 clamp(16px,5vw,64px);font:700 .85rem var(--bd);letter-spacing:.2em;text-transform:uppercase}
+html.mo .reel .lb.t{top:0}html.mo .reel .lb.b{bottom:0}.reel .lb a{text-decoration:underline;text-underline-offset:4px}.reel .tcode{font-variant-numeric:tabular-nums;color:var(--build)}
+/* preloader */
+.pre{display:none}html.mo-pre .pre{display:grid;position:fixed;inset:0;z-index:500;place-items:center;pointer-events:none}
+.pre .pn1,.pre .pn2{position:absolute;left:0;right:0;height:50.5%;background:#0B0B0F}.pre .pn1{top:0}.pre .pn2{bottom:0}
+.pre .mk{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;color:#F3EEE4;font:700 1rem var(--hd)}
+.pre .mk svg{width:64px;height:64px}.pre .mk rect{transform-box:fill-box;transform-origin:bottom}.pre .ct{font-variant-numeric:tabular-nums;letter-spacing:.2em}
+/* hero starts hidden until the intro timeline runs */
+html.mo .big i{animation:none;transform:none;opacity:0}html.mo .crew .mem,html.mo .hero .sub,html.mo .hero .acts{visibility:hidden}
+html.mo .mem .av{transition:filter .6s}html.mo .rv{opacity:0}
+html.mo .mt{animation-duration:60s}html.mo .tl li{transition:none}
+/* custom cursor (mouse only) */
+.cur{display:none}
+@media(hover:hover) and (pointer:fine){html.mo .cur{display:block;position:fixed;left:0;top:0;z-index:400;pointer-events:none;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease)}
+html.mo .cur.big{width:74px;height:74px;margin:-37px 0 0 -37px}html.mo .cur span{position:absolute;inset:0;display:grid;place-items:center;font:700 .7rem var(--bd);color:#000;letter-spacing:.1em;text-transform:uppercase;opacity:0;transition:opacity .2s}html.mo .cur.big span{opacity:1}
+html.mo .sva,html.mo .sva a,html.mo .sva button{cursor:none}}
+/* animated film grain + vignette on desktop */
+@media(min-width:961px) and (pointer:fine){html.mo body.sva:after{inset:-50%;width:200%;height:200%;opacity:.07;animation:grain .9s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-6%,4%)}40%{transform:translate(5%,-7%)}60%{transform:translate(-4%,-3%)}80%{transform:translate(7%,6%)}100%{transform:translate(0,0)}}}
+.mtog{opacity:.8}
+@media(prefers-reduced-motion:reduce){.pre,.cur{display:none!important}}
+/* Lenis housekeeping */
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:clip}
+.reel .card0 b{margin:.15em 0 .3em}
