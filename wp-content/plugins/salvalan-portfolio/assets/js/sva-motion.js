@@ -14,10 +14,10 @@ if(window.Lenis&&fine){L=new Lenis({lerp:.1,anchors:false});SVAMO.lenis=L;L.on('
 /* text splitter: words in masks (or plain words) */
 function split(el,mask){var t=el.textContent.trim();el.setAttribute('aria-label',t);el.textContent='';return t.split(/\s+/).map(function(w){var o=d.createElement('span'),i=d.createElement('span');o.setAttribute('aria-hidden','true');o.style.cssText='display:inline-block;vertical-align:top'+(mask?';overflow:hidden;padding-bottom:.1em':'');i.style.display='inline-block';i.textContent=w;o.appendChild(i);el.appendChild(o);el.appendChild(d.createTextNode(' '));return i})}
 /* ---- intro: preloader then hero ---- */
-var big=$$('.big i'),crew=$$('.crew .mem'),sub=$$('.hero .sub,.hero .acts');gsap.set(big,{yPercent:105,opacity:1});
+if(!fine)h.classList.add('touch');var big=$$('.big i'),crew=$$('.crew .mem'),sub=$$('.hero .sub,.hero .acts');gsap.set(big,{yPercent:105,opacity:1});
 function intro(){gsap.timeline({defaults:{ease:'expo.out'}}).to(big,{yPercent:0,duration:1.4,stagger:.14},0)
  .from(sub,{autoAlpha:0,y:30,duration:1,stagger:.12,clearProps:'transform,opacity'},.5)
- .from(crew,{autoAlpha:0,yPercent:14,clipPath:'inset(100% 0 0 0)',duration:1.5,stagger:.15,clearProps:'clipPath,transform,opacity'},.3)
+ .from(fine?crew:[],{autoAlpha:0,yPercent:14,clipPath:'inset(100% 0 0 0)',duration:1.5,stagger:.15,clearProps:'clipPath,transform,opacity'},.3)
  .add(function(){SVAMO.introDone=true;d.dispatchEvent(new Event('sva:intro'))},.3)}
 var pre=$('.pre');
 if(pre&&h.classList.contains('mo-pre')){
@@ -28,7 +28,7 @@ if(pre&&h.classList.contains('mo-pre')){
  .to($('.mk',pre),{opacity:0,y:-24,duration:.5},'>.1')
  .to($('.pn1',pre),{yPercent:-101,duration:1.2,ease:'expo.inOut'},'>-.05').to($('.pn2',pre),{yPercent:101,duration:1.2,ease:'expo.inOut'},'<')
  .add(intro,'<.5').add(function(){pre.remove();h.classList.remove('mo-pre');h.style.overflow='';L&&L.start();ScrollTrigger.refresh()});
- if(h.classList.contains('sva-gate'))d.addEventListener('sva:enter',function(){ptl.play()},{once:true});
+ if(h.classList.contains('sva-gate'))d.addEventListener('sva:enter',function(){ptl.timeScale(2).play()},{once:true});
 }else if(h.classList.contains('sva-gate'))d.addEventListener('sva:enter',intro,{once:true});else intro();
 /* ---- hero scroll scene: headline lines drift apart, spotlight blooms, portraits parallax ---- */
 gsap.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'55% top',scrub:true}})
@@ -43,10 +43,7 @@ $$('.big2').forEach(function(e){var w=split(e,false);gsap.fromTo(w,{opacity:.15}
 /* everything else that used to fade in: staggered rise */
 $$('.rv').forEach(function(e){e.classList.remove('rv');e.setAttribute('data-rvb','');gsap.set(e,{opacity:0,y:56})});
 ScrollTrigger.batch('[data-rvb]',{start:'top 90%',once:true,onEnter:function(b){gsap.to(b,{opacity:1,y:0,duration:1.2,ease:'expo.out',stagger:.1,clearProps:'transform'})}});
-/* project screenshots: wipe in, then drift inside their frame */
-$$('.shot a').forEach(function(a){var im=$('img',a);
- gsap.fromTo(a,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.4,ease:'expo.inOut',scrollTrigger:{trigger:a,start:'top 88%',once:true}});
- });
+/* project screenshots: shown in full, never cropped (the reveal is in sva-fix.js: fade and rise only) */
 /* ---- showreel: pinned film stage, scrubbed by scroll ---- */
 var st=$('.reel .stage');
 if(st){var fr=$$('.fr',st),N=fr.length,tc=$('.tcode',st),T=N*4,z=function(v){return(v<10?'0':'')+v};

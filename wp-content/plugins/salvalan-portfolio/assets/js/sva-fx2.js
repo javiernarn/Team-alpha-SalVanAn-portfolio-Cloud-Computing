@@ -94,10 +94,10 @@ safe('cue',function(){
 
 /* ============ 7. Live clock in the footer ============ */
 safe('clock',function(){
- var t=$('.sva-ft .mut.small');if(!t||!window.Intl||!Intl.DateTimeFormat)return;
- var s=d.createElement('span'),f=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Manila'});
+ var t=$('.sva-ft .meta');if(!t||!window.Intl||!Intl.DateTimeFormat)return;
+ var s=d.createElement('div'),f=new Intl.DateTimeFormat('en-PH',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'Asia/Manila'});
  s.className='clk';t.appendChild(s);
- function up(){s.textContent='Misamis Oriental, PH · '+f.format(new Date())+' PHT'}up();setInterval(up,30000);
+ function up(){s.textContent='Misamis Oriental, PH · '+f.format(new Date()).replace(/\s?([ap])\.?m\.?/i,function(m,x){return' '+x.toUpperCase()+'M'})+' PHT'}up();setInterval(up,15000);
 });
 
 addEventListener('load',function(){ScrollTrigger.refresh()});

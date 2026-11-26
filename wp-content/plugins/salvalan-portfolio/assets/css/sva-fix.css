@@ -3,10 +3,11 @@
 .mem .av{will-change:auto}
 html.mo .crew.ready .mem{visibility:visible!important}
 @media(hover:none),(max-width:700px){
- .mem .av{transform:none!important;filter:none!important;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
- .mem{contain:layout paint;transition:height .55s var(--ease)!important;backface-visibility:hidden}
- .mem.on{height:auto!important;min-height:min(440px,72svh)}
- .mem .more{transition:max-height .5s var(--ease),opacity .4s,margin-top .5s var(--ease)!important}
+ /* phone cards: fixed heights (so the height can animate), no parallax, nothing inherited from the intro */
+ .crew .mem{flex:none!important;height:clamp(176px,25svh,220px)!important;min-height:0!important;transform:none!important;clip-path:none!important;opacity:1!important;visibility:visible!important;transition:height .45s var(--ease)!important}
+ .crew .mem.on{height:min(470px,74svh)!important;min-height:380px!important}
+ .mem .av{position:absolute;inset:0;transform:none!important;filter:none!important;transition:none!important;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+ .mem .more{transition:max-height .4s var(--ease),opacity .3s,margin-top .4s var(--ease)!important}
 }
 /* screenshots: never crop, desktop or phone */
 .shot a{display:block;line-height:0;background:var(--card);cursor:zoom-in}
@@ -33,9 +34,24 @@ html.lb-open{overflow:hidden}
 .fxorb{position:absolute;z-index:0;width:min(46vw,420px);aspect-ratio:1;border-radius:50%;filter:blur(70px);opacity:.28;pointer-events:none}
 #contact .wrap,#experience .wrap,#projects .wrap{position:relative;z-index:1}
 #contact,#experience{overflow:clip}
-.pc{transform-style:preserve-3d}
 .shot .bar{line-height:1.4}.shot figcaption{line-height:1.4}
 
 .pc.split>.fxbar{margin:0 0 -6px}.pc.split{align-items:start}.pc.split .shot{align-self:center}
 #contact .two.start{align-items:start}
+.shot a{-webkit-transform:translateZ(0);clip-path:none!important}
+/* footer: logo + info on one side, buttons on the other, no dead space */
+.sva-ft{padding:clamp(22px,3vw,34px) 0 clamp(26px,3vw,40px)}
+.sva-ft .in{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:16px 24px}
+.sva-ft .logo{flex:none;display:inline-flex;align-items:center;gap:10px}
+.sva-ft .meta{display:flex;flex-direction:column;gap:6px;margin-right:auto;min-width:0}
+.sva-ft .meta .cp{display:flex;align-items:center;flex-wrap:wrap;gap:6px 0;margin:0}
+.sva-ft .meta .clk{margin:0;font:600 .82rem var(--bd);color:var(--mut);font-variant-numeric:tabular-nums}
+.sva-ft .meta .clk:before{margin:0}
+.sva-ft .acts{margin:0;display:flex;gap:10px;flex:none}
+@media(max-width:700px){
+ .sva-ft{padding:20px 0 calc(88px + env(safe-area-inset-bottom))}
+ .sva-ft .in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px}
+ .sva-ft .acts{grid-column:1/-1}.sva-ft .acts [data-top]{display:none}
+ .sva-ft .acts:not(:has(:not([hidden]):not([data-top]))){display:none}
+}
 .sva-ft .ver{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:99px;border:1.5px solid var(--ln);font-size:.75rem;font-weight:700;letter-spacing:.03em}

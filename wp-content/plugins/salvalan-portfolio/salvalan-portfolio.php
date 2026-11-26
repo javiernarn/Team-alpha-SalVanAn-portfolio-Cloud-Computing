@@ -2,11 +2,11 @@
 /**
  * Plugin Name: SalValAn Portfolio
  * Description: Cinematic motion one-page portfolio (GSAP, ScrollTrigger, Lenis, SplitText, Flip, WebGL aurora hero, film-camera showreel, end credits, project preview, self-drawing timeline, giant call to action, background music) for SalValAn. Home includes the team. Sections: Showreel, About, Skills & Services, Projects, Experience, Contact. Dark and light mode, mobile tab bar, installable PWA.
- * Version: 6.3.3
+ * Version: 6.5.0
  * Author: SalValAn
  */
 if(!defined('ABSPATH'))exit;
-define('SVA_VER','6.4.1');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
+define('SVA_VER','6.5.0');define('SVA_DIR',plugin_dir_path(__FILE__));define('SVA_URL',plugin_dir_url(__FILE__));
 /* every section of the long home page, in scroll order (one file each in /sections) */
 const SVA_SECTIONS=['home','reel','band','about','services','projects','experience','cta','contact','credits'];
 /* the old v2 separate pages: they now redirect to their section on the home page */
@@ -83,7 +83,7 @@ add_action('wp_enqueue_scripts',function(){
  wp_enqueue_script('sva-fx',SVA_URL.'assets/js/sva-fx.js',['sva-motion','sva-split','sva-scr','sva-flip'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-fx.js'),true);
  wp_enqueue_script('sva-fx2',SVA_URL.'assets/js/sva-fx2.js',['sva-fx'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-fx2.js'),true);
  wp_enqueue_script('sva',SVA_URL.'assets/js/sva.js',['sva-fx2'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva.js'),true);
- wp_enqueue_script('sva-sound',SVA_URL.'assets/js/sva-sound.js',SVA_URL.'assets/js/sva-fix.js',SVA_URL.'assets/css/sva-fix.css',['sva'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-sound.js'),true);
+ wp_enqueue_script('sva-sound',SVA_URL.'assets/js/sva-sound.js',['sva'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-sound.js'),true);
  wp_enqueue_script('sva-fix',SVA_URL.'assets/js/sva-fix.js',['sva-sound'],SVA_VER.'.'.filemtime(SVA_DIR.'assets/js/sva-fix.js'),true);
  $mu=sva_opt('music_url');$mu=$mu===''?SVA_URL.'assets/audio/sunburst.mp3':($mu==='off'?'':$mu);
  $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$hp=$hp?$hp:'/';wp_add_inline_script('sva','window.SVA={sw:'.wp_json_encode($hp.'salvalan-sw').',scope:'.wp_json_encode($hp).',music:'.wp_json_encode($mu).'};','before');
@@ -115,7 +115,7 @@ add_action('init',function(){
  if($p==='/salvalan-sw'){
   header('Content-Type: application/javascript; charset=utf-8');header('Service-Worker-Allowed: /');header('Cache-Control: no-cache');
   $v=SVA_VER.'-'.filemtime(SVA_DIR.'assets/css/sva.css').filemtime(SVA_DIR.'assets/js/sva.js').filemtime(SVA_DIR.'assets/js/sva-motion.js').filemtime(SVA_DIR.'assets/css/sva-motion.css').filemtime(SVA_DIR.'assets/js/sva-fx.js').filemtime(SVA_DIR.'assets/css/sva-fx.css').filemtime(SVA_DIR.'assets/js/sva-fx2.js').filemtime(SVA_DIR.'assets/css/sva-fx2.css').filemtime(SVA_DIR.'assets/js/sva-sound.js').filemtime(SVA_DIR.'assets/js/sva-fix.js').filemtime(SVA_DIR.'assets/css/sva-fix.css').filemtime(SVA_DIR.'assets/img/mariel.jpg').filemtime(SVA_DIR.'assets/img/diane.jpg').filemtime(SVA_DIR.'assets/img/jonee.jpg');
-  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/js/sva-motion.js',SVA_URL.'assets/css/sva-motion.css',SVA_URL.'assets/js/sva-fx.js',SVA_URL.'assets/css/sva-fx.css',SVA_URL.'assets/js/sva-fx2.js',SVA_URL.'assets/css/sva-fx2.css',SVA_URL.'assets/js/sva-sound.js',SVA_URL.'assets/js/vendor/SplitText.min.js',SVA_URL.'assets/js/vendor/ScrambleTextPlugin.min.js',SVA_URL.'assets/js/vendor/Flip.min.js',SVA_URL.'assets/js/vendor/gsap.min.js',SVA_URL.'assets/js/vendor/ScrollTrigger.min.js',SVA_URL.'assets/js/vendor/lenis.min.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg',SVA_URL.'assets/img/ak-admin-web.jpg',SVA_URL.'assets/img/ak-mobile-home.jpg',SVA_URL.'assets/img/ak-mobile-login.jpg',SVA_URL.'assets/img/atms-home.jpg',SVA_URL.'assets/img/occdl-home.jpg',SVA_URL.'assets/img/sclf-home.jpg'];
+  $as=[SVA_URL.'assets/css/sva.css',SVA_URL.'assets/js/sva.js',SVA_URL.'assets/js/sva-motion.js',SVA_URL.'assets/css/sva-motion.css',SVA_URL.'assets/js/sva-fx.js',SVA_URL.'assets/css/sva-fx.css',SVA_URL.'assets/js/sva-fx2.js',SVA_URL.'assets/css/sva-fx2.css',SVA_URL.'assets/js/sva-sound.js',SVA_URL.'assets/js/sva-fix.js',SVA_URL.'assets/css/sva-fix.css',SVA_URL.'assets/audio/sunburst.mp3',SVA_URL.'assets/js/vendor/SplitText.min.js',SVA_URL.'assets/js/vendor/ScrambleTextPlugin.min.js',SVA_URL.'assets/js/vendor/Flip.min.js',SVA_URL.'assets/js/vendor/gsap.min.js',SVA_URL.'assets/js/vendor/ScrollTrigger.min.js',SVA_URL.'assets/js/vendor/lenis.min.js',SVA_URL.'assets/img/icon-192.png',SVA_URL.'assets/fonts/space-grotesk-latin-wght-normal.woff2',SVA_URL.'assets/fonts/manrope-latin-wght-normal.woff2',SVA_URL.'assets/img/jonee.jpg',SVA_URL.'assets/img/diane.jpg',SVA_URL.'assets/img/mariel.jpg',SVA_URL.'assets/img/ak-admin-web.jpg',SVA_URL.'assets/img/ak-mobile-home.jpg',SVA_URL.'assets/img/ak-mobile-login.jpg',SVA_URL.'assets/img/atms-home.jpg',SVA_URL.'assets/img/occdl-home.jpg',SVA_URL.'assets/img/sclf-home.jpg'];
   $hp=wp_parse_url(home_url('/'),PHP_URL_PATH);$core=[$hp?$hp:'/'];
   echo "const V='sva-$v',CORE=".wp_json_encode(array_values(array_unique($core))).",ASSETS=".wp_json_encode($as).",OFF=".wp_json_encode(($hp?$hp:'/').'salvalan-offline').";\n";
   echo <<<'JS'

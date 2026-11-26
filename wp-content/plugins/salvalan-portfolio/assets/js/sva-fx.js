@@ -202,7 +202,7 @@ safe('band',function(){
 /* ============ 15. Images: faces open like an iris, phone screens float at different depths ============ */
 safe('images',function(){
  $$('.idr .av').forEach(function(a){gsap.fromTo(a,{clipPath:'circle(0% at 50% 50%)',scale:1.35},{clipPath:'circle(75% at 50% 50%)',scale:1,duration:1.3,ease:'expo.out',clearProps:'clipPath,transform',scrollTrigger:{trigger:a,start:'top 94%',once:true}})});
- $$('.phones .shot').forEach(function(s,i){gsap.fromTo(s,{y:i?70:20},{y:i?-30:-60,ease:'none',scrollTrigger:{trigger:s.parentNode,start:'top bottom',end:'bottom top',scrub:true}})});
+ if(fine)$$('.phones .shot').forEach(function(s,i){gsap.fromTo(s,{y:i?70:20},{y:i?-30:-60,ease:'none',scrollTrigger:{trigger:s.parentNode,start:'top bottom',end:'bottom top',scrub:true}})});
 });
 
 /* ============ 16. Buttons roll their label; cards carry a spotlight that follows the cursor ============ */
