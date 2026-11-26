@@ -93,11 +93,7 @@ if(hero&&sp&&matchMedia('(pointer:fine)').matches){
 if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
  $$('.mag').forEach(function(b){b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)'});b.addEventListener('pointerleave',function(){b.style.transform=''})});
 }
-/* team panels: tap to open on touch screens */
-var touchy=matchMedia('(hover:none),(max-width:700px)').matches;
-$$('.mem').forEach(function(m){m.addEventListener('click',function(e){if(e.target.closest('a')||!touchy)return;var o=m.classList.contains('on');$$('.mem').forEach(function(x){x.classList.remove('on')});if(!o){m.classList.add('on');setTimeout(function(){var r=m.getBoundingClientRect();if(r.top<76||r.bottom>innerHeight-84)glide(scrollY+r.top-84)},650)}});m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();m.click()}})});
-if(touchy){var f1=$('.mem');f1&&f1.classList.add('on')}
-
+/* team panels: handled in sva-fix.js */
 /* drawer */
 var dr=$('#sva-drawer'),pn=dr&&$('.pn',dr),opener=null;
 function dx(o,keepFocus){

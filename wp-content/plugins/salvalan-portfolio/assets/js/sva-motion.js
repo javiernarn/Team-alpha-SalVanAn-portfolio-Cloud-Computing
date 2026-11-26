@@ -2,7 +2,7 @@
 (function(){var d=document,h=d.documentElement;
 function $(s,c){return(c||d).querySelector(s)}function $$(s,c){return[].slice.call((c||d).querySelectorAll(s))}
 /* motion on/off switch in the footer */
-var on=true;try{on=localStorage.getItem('sva-motion')!=='off'}catch(e){}
+var on=true;
 var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 $$('[data-motion]').forEach(function(b){if(rm){b.hidden=true;return}b.textContent='Cinematic motion: '+(on?'on':'off');b.addEventListener('click',function(){try{localStorage.setItem('sva-motion',on?'off':'on');sessionStorage.removeItem('sva-pre')}catch(e){}location.reload()})});
 if(!h.classList.contains('mo')||!window.gsap||!window.ScrollTrigger){h.classList.remove('mo','mo-pre');var pp=$('.pre');pp&&pp.remove();return}
@@ -33,7 +33,7 @@ if(pre&&h.classList.contains('mo-pre')){
 /* ---- hero scroll scene: headline lines drift apart, spotlight blooms, portraits parallax ---- */
 gsap.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'55% top',scrub:true}})
  .to('.big .ln:nth-child(odd)',{xPercent:-22,opacity:.15,ease:'none'},0).to('.big .ln:nth-child(2)',{xPercent:22,opacity:.15,ease:'none'},0).to('.spot',{scale:1.8,opacity:0,ease:'none'},0);
-$$('.mem .av').forEach(function(a){gsap.fromTo(a,{yPercent:6,scale:1.16},{yPercent:-6,scale:1.16,ease:'none',scrollTrigger:{trigger:'.crew',start:'top bottom',end:'bottom top',scrub:true}})});
+if(fine)$$('.mem .av').forEach(function(a){gsap.fromTo(a,{yPercent:6,scale:1.16},{yPercent:-6,scale:1.16,ease:'none',scrollTrigger:{trigger:'.crew',start:'top bottom',end:'bottom top',scrub:true}})});
 /* marquee leans into the scroll speed */
 ScrollTrigger.create({onUpdate:function(s){var v=gsap.utils.clamp(-10,10,s.getVelocity()/-300);gsap.to('.mq',{skewX:v,duration:.25,overwrite:true,onComplete:function(){gsap.to('.mq',{skewX:0,duration:.7,ease:'power3.out'})}})}});
 /* ---- section headings rise out of masks ---- */
@@ -46,7 +46,7 @@ ScrollTrigger.batch('[data-rvb]',{start:'top 90%',once:true,onEnter:function(b){
 /* project screenshots: wipe in, then drift inside their frame */
 $$('.shot a').forEach(function(a){var im=$('img',a);
  gsap.fromTo(a,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.4,ease:'expo.inOut',scrollTrigger:{trigger:a,start:'top 88%',once:true}});
- gsap.fromTo(im,{yPercent:-6,scale:1.14},{yPercent:6,scale:1.14,ease:'none',scrollTrigger:{trigger:a,start:'top bottom',end:'bottom top',scrub:true}})});
+ });
 /* ---- showreel: pinned film stage, scrubbed by scroll ---- */
 var st=$('.reel .stage');
 if(st){var fr=$$('.fr',st),N=fr.length,tc=$('.tcode',st),T=N*4,z=function(v){return(v<10?'0':'')+v};
