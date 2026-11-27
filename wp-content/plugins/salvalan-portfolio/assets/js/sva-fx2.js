@@ -29,9 +29,9 @@ safe('eyebrow',function(){
 safe('preview',function(){
  var rows=$$('#svcgrid .row2'),ref=$('.mem .av');if(!fine||!rows.length||!ref)return;
  var base=ref.getAttribute('src').replace(/[^\/]*$/,''),
- map={'Web Application Development':['atms-home.jpg','left top'],'UI/UX and Website Design':['sclf-home.jpg','center'],
-  'System Analysis':['ak-admin-web.jpg','left top'],'Process Analysis':['occdl-home.jpg','center'],
-  'Technical Documentation':['ak-admin-web.jpg','right center'],'Editing and Proofreading':['atms-home.jpg','right top']};
+ map={'Web Application Development':['atms-home.jpg','center'],'UI/UX and Website Design':['sclf-home.jpg','center'],
+  'System Analysis':['ak-admin-web.jpg','center'],'Process Analysis':['ak-mobile-home.jpg','center'],
+  'Technical Documentation':['ak-admin-web.jpg','center'],'Editing and Proofreading':['ak-mobile-login.jpg','center']};
  var pv=d.createElement('div'),im=d.createElement('img'),shown=false,lx=0,rt=0;
  pv.className='pv';pv.setAttribute('aria-hidden','true');im.alt='';im.decoding='async';pv.appendChild(im);d.body.appendChild(pv);
  gsap.set(pv,{xPercent:-50,yPercent:-50,scale:.7,autoAlpha:0});

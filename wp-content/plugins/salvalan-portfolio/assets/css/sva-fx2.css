@@ -61,14 +61,14 @@ html.mo .tl li{position:relative}
 /* ---- Enter screen (the tap that lets the browser play music) ---- */
 .gate{display:none}
 html.sva-gate{overflow:hidden}
-html.sva-gate .gate,.gate.out{display:grid;position:fixed;inset:0;z-index:600;place-items:center;background:#0B0B0F;color:#F3EEE4;transition:opacity .8s ease,visibility .8s}
+html.sva-gate .gate,.gate.out{display:grid;position:fixed;inset:0;z-index:600;place-items:center;background:var(--bg);color:var(--ink);transition:opacity .8s ease,visibility .8s}
 .gate.out{opacity:0;visibility:hidden;pointer-events:none}
 .gate .gi{display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;text-align:center}
 .gate svg{width:64px;height:64px;margin-bottom:4px}
 .gate b{font:700 1.6rem var(--hd);letter-spacing:.02em}
 .gate span{font-size:.95rem;opacity:.7}
-.gate .go{margin-top:14px;min-width:190px;padding:14px 34px;border:0;border-radius:999px;background:#F3EEE4;color:#0B0B0F;font:700 1rem var(--hd);letter-spacing:.04em;cursor:pointer;transition:transform .25s ease}
-.gate .go:hover{transform:scale(1.05)}.gate .go:focus-visible,.gate .no:focus-visible{outline:2px solid #F3EEE4;outline-offset:4px}
-.gate .no{border:0;background:none;color:#F3EEE4;opacity:.6;font:500 .85rem var(--bd,inherit);text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:6px}
+.gate .go{margin-top:14px;min-width:190px;padding:14px 34px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 1rem var(--hd);letter-spacing:.04em;cursor:pointer;transition:transform .25s ease}
+.gate .go:hover{transform:scale(1.05)}.gate .go:focus-visible,.gate .no:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.gate .no{border:0;background:none;color:var(--ink);opacity:.7;font:500 .85rem var(--bd,inherit);text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:6px}
 .gate .no:hover{opacity:1}
 @media(prefers-reduced-motion:reduce){.gate,.gate.out{transition:none}}

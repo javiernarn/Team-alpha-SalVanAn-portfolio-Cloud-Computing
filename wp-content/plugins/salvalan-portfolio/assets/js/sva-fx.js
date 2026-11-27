@@ -126,7 +126,7 @@ safe('depth',function(){
 /* ============ 7. Showreel becomes a film camera ============ */
 safe('reel',function(){
  var st=$('.reel .stage');if(!st)return;
- var fr=$$('.fr',st),N=fr.length,leak=d.createElement('div'),sn=$('.sn',st),frames=$('.frames',st),last=-1;
+ var fr=$$('.fr',st).filter(function(f){return getComputedStyle(f).display!=='none'}),N=fr.length,leak=d.createElement('div'),sn=$('.sn',st),frames=$('.frames',st),last=-1;
  leak.className='leak';leak.setAttribute('aria-hidden','true');st.insertBefore(leak,$('.lb.t',st));
  ScrollTrigger.create({trigger:'.reel',start:'top top',end:'+='+(N*(innerWidth<700?60:90))+'%',onUpdate:function(s){
   var t=s.progress*N,f=0,i;for(i=1;i<N;i++)f=Math.max(f,1-Math.abs(t-(i-.15))/.22);

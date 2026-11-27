@@ -46,18 +46,14 @@ ScrollTrigger.batch('[data-rvb]',{start:'top 90%',once:true,onEnter:function(b){
 /* project screenshots: shown in full, never cropped (the reveal is in sva-fix.js: fade and rise only) */
 /* ---- showreel: pinned film stage, scrubbed by scroll ---- */
 var st=$('.reel .stage');
-if(st){var fr=$$('.fr',st),N=fr.length,tc=$('.tcode',st),T=N*4,z=function(v){return(v<10?'0':'')+v};
+if(st){var fr=$$('.fr',st).filter(function(f){return getComputedStyle(f).display!=='none'}),N=fr.length,tc=$('.tcode',st),T=N*4,z=function(v){return(v<10?'0':'')+v};
  gsap.fromTo($$('.lb',st),{height:'46vh'},{height:'12vh',ease:'none',scrollTrigger:{trigger:'.reel',start:'top bottom',end:'top top',scrub:true}});
  var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'.reel',start:'top top',end:'+='+(N*(innerWidth<700?60:90))+'%',pin:st,scrub:.6,anticipatePin:1,
   onUpdate:function(s){var t=s.progress*T;tc.textContent='00:00:'+z(Math.floor(t))+':'+z(Math.floor((t%1)*24))}}});
  fr.forEach(function(f,i){var im=$('img',f),cp=$('figcaption',f),k=i-.3;
-  if(i){tl.fromTo(f,{opacity:0},{opacity:1,duration:.3},k);tl.fromTo(im,{scale:1.3,xPercent:-3},{scale:1.02,xPercent:3,duration:1.3},k);tl.fromTo(cp,{y:50,opacity:0},{y:0,opacity:1,duration:.3},i-.1)}
+  if(i){tl.fromTo(f,{opacity:0},{opacity:1,duration:.3},k);tl.fromTo(cp,{y:50,opacity:0},{y:0,opacity:1,duration:.3},i-.1)}
   if(i<N-1)tl.to(f,{opacity:0,duration:.3},i+.7)});
  tl.to({},{duration:.001},N)}
-/* ---- cursor ---- */
-if(fine){var c=d.createElement('div'),lb=d.createElement('span');c.className='cur';c.appendChild(lb);d.body.appendChild(c);
- var qx=gsap.quickTo(c,'x',{duration:.25,ease:'power3'}),qy=gsap.quickTo(c,'y',{duration:.25,ease:'power3'});
- addEventListener('pointermove',function(e){qx(e.clientX);qy(e.clientY);var t=e.target.closest&&e.target.closest('.shot a,.mem'),l=t?(t.matches('.mem')?'View':'Open'):'';c.classList.toggle('big',!!l);if(lb.textContent!==l)lb.textContent=l},{passive:true})}
 /* layout changes (filters) and late images need a fresh measure */
 $$('[data-filters] button').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){ScrollTrigger.refresh()},60)})});
 addEventListener('load',function(){ScrollTrigger.refresh()});

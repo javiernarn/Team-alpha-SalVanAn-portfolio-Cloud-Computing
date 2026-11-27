@@ -25,11 +25,6 @@ html.mo .reel .lb.t{top:0}html.mo .reel .lb.b{bottom:0}.reel .lb a{text-decorati
 html.mo .big i{animation:none;transform:none;opacity:0}@media(hover:hover) and (pointer:fine){html.mo .crew .mem{visibility:hidden}}html.mo .hero .sub,html.mo .hero .acts{visibility:hidden}
 html.mo .mem .av{transition:filter .6s}html.mo .rv{opacity:0}
 html.mo .mt{animation-duration:60s}html.mo .tl li{transition:none}
-/* custom cursor (mouse only) */
-.cur{display:none}
-@media(hover:hover) and (pointer:fine){html.mo .cur{display:block;position:fixed;left:0;top:0;z-index:400;pointer-events:none;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease)}
-html.mo .cur.big{width:74px;height:74px;margin:-37px 0 0 -37px}html.mo .cur span{position:absolute;inset:0;display:grid;place-items:center;font:700 .7rem var(--bd);color:#000;letter-spacing:.1em;text-transform:uppercase;opacity:0;transition:opacity .2s}html.mo .cur.big span{opacity:1}
-html.mo .sva,html.mo .sva a,html.mo .sva button{cursor:none}}
 /* animated film grain + vignette on desktop */
 @media(min-width:961px) and (pointer:fine){html.mo body.sva:after{inset:-50%;width:200%;height:200%;opacity:.07;animation:grain .9s steps(6) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-6%,4%)}40%{transform:translate(5%,-7%)}60%{transform:translate(-4%,-3%)}80%{transform:translate(7%,6%)}100%{transform:translate(0,0)}}}

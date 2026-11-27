@@ -5,9 +5,8 @@
    remember the choice. Pauses when the tab is hidden. */
 (function(){var d=document,btns=[].slice.call(d.querySelectorAll('[data-sound]'));if(!btns.length)return;
 var src=(window.SVA&&SVA.music)||'';if(!src){btns.forEach(function(b){b.hidden=true});return}
-var VOL=.38,el=null,want=true,run=false,iv=0,pref=null,canVol=true,h=d.documentElement,gate=d.getElementById('sva-gate');
-try{pref=localStorage.getItem('sva-music')}catch(e){}
-if(pref==='off')want=false;
+var VOL=.38,el=null,want=true,run=false,iv=0,canVol=true,h=d.documentElement,gate=d.getElementById('sva-gate');
+window.__svaGate=1; /* the Enter screen is only ever closed by the visitor's own button */
 /* iOS 16.4+: play through the speaker even when the silent switch is on */
 try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
 function save(v){try{localStorage.setItem('sva-music',v)}catch(e){}}
@@ -41,6 +40,7 @@ btns.forEach(function(b){b.addEventListener('click',function(){want&&run?pause()
 /* if the browser refused earlier, begin on the first tap, click or key press anywhere */
 var evs=['touchend','click','keydown'];
 function first(e){
+ if(h.classList.contains('sva-gate'))return;
  if(run){evs.forEach(function(n){d.removeEventListener(n,first,true)});return}
  if(e&&e.target&&e.target.closest&&e.target.closest('[data-sound],[data-nosound]'))return;
  if(want)start()}
@@ -55,8 +55,6 @@ go&&go.addEventListener('click',function(){resume();enter()});
 no&&no.addEventListener('click',function(){pause();enter()});
 if(gate&&go&&h.classList.contains('sva-gate')){try{go.focus({preventScroll:true})}catch(e){}}
 /* start downloading the track while the visitor reads the Enter screen (it plays on the tap) */
-if(want){make();try{el.load()}catch(e){}}
-/* browsers that already allow sound (returning desktop visitors): skip the Enter screen */
-if(want){if(canVol)el.volume=0;var p0=el.play();p0&&p0.then&&p0.then(function(){sync();fade(VOL,2);enter()},function(){})}
+make();try{el.load()}catch(e){}
 ui();
 })();

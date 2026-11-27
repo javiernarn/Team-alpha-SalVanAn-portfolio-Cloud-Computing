@@ -55,3 +55,28 @@ html.lb-open{overflow:hidden}
  .sva-ft .acts:not(:has(:not([hidden]):not([data-top]))){display:none}
 }
 .sva-ft .ver{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:99px;border:1.5px solid var(--ln);font-size:.75rem;font-weight:700;letter-spacing:.03em}
+
+/* ---- showreel: phones get phone screenshots, laptops/desktops get desktop screenshots; always the whole image ---- */
+.reel .fm{display:none!important}
+@media(max-width:760px){.reel .fd{display:none!important}.reel .fm{display:grid!important}}
+.reel .fm img{display:block;max-width:min(100%,340px);margin-inline:auto}
+html.mo .reel .fr:not(.tc0) img{position:absolute;left:0;top:12vh;width:100%;height:calc(100% - 24vh);max-width:none;margin:0;object-fit:contain;filter:none}
+html.mo .reel .fm:not(.tc0) img{top:13vh;height:calc(100% - 25vh - 104px)}
+html.mo .reel .fm:not(.tc0):after{background:none}
+html.mo .reel .fm figcaption{bottom:calc(12vh + 14px)}
+/* services preview: whole screenshot, no crop */
+.pv img{object-fit:contain!important;background:var(--sf)}
+
+/* ---- magnifying-glass cursor, x-ray style: it inverts whatever is under it, so it works on any theme (mouse / trackpad only) ---- */
+.mag{display:none}
+@media(hover:hover) and (pointer:fine){
+ html.mcur,html.mcur *{cursor:none!important}
+ html.mcur :is(input,textarea,select){cursor:text!important}
+ .mag{display:block;position:fixed;left:0;top:0;z-index:100000;width:96px;height:96px;pointer-events:none;color:#fff;mix-blend-mode:difference;opacity:0;transition:opacity .25s;will-change:transform}
+ .mag.on{opacity:1}.mag.hid{opacity:0}
+ .mag svg{display:block;width:100%;height:100%;overflow:visible;transform-origin:39px 39px;transition:transform .3s var(--ease)}
+ .mag .gl{fill:#fff;fill-opacity:.9}
+ .mag.act svg{transform:scale(1.2)}.mag.dn svg{transform:scale(.92)}
+ .mag span{position:absolute;left:39px;top:39px;width:0;height:0;display:grid;place-items:center;white-space:nowrap;font:700 .66rem var(--bd);letter-spacing:.1em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .2s}
+ .mag.lbl span{opacity:1}
+}
